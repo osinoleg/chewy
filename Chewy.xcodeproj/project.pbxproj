@@ -1,0 +1,484 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D28CDA5118FDE4DC006C4275 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D28CDA5018FDE4DC006C4275 /* Foundation.framework */; };
+		D28CDA5318FDE4DC006C4275 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D28CDA5218FDE4DC006C4275 /* CoreGraphics.framework */; };
+		D28CDA5518FDE4DC006C4275 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D28CDA5418FDE4DC006C4275 /* UIKit.framework */; };
+		D28CDA5B18FDE4DC006C4275 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D28CDA5918FDE4DC006C4275 /* InfoPlist.strings */; };
+		D28CDA5D18FDE4DC006C4275 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D28CDA5C18FDE4DC006C4275 /* main.m */; };
+		D28CDA6118FDE4DC006C4275 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D28CDA6018FDE4DC006C4275 /* AppDelegate.m */; };
+		D28CDA6318FDE4DC006C4275 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D28CDA6218FDE4DC006C4275 /* Images.xcassets */; };
+		D28CDA6A18FDE4DC006C4275 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D28CDA6918FDE4DC006C4275 /* XCTest.framework */; };
+		D28CDA6B18FDE4DC006C4275 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D28CDA5018FDE4DC006C4275 /* Foundation.framework */; };
+		D28CDA6C18FDE4DC006C4275 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D28CDA5418FDE4DC006C4275 /* UIKit.framework */; };
+		D28CDA7418FDE4DC006C4275 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D28CDA7218FDE4DC006C4275 /* InfoPlist.strings */; };
+		D28CDA7618FDE4DC006C4275 /* ChewyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D28CDA7518FDE4DC006C4275 /* ChewyTests.m */; };
+		D28CDA8118FDE54C006C4275 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D28CDA8018FDE54C006C4275 /* MainViewController.m */; };
+		D28CDA8418FDE743006C4275 /* Chewy.m in Sources */ = {isa = PBXBuildFile; fileRef = D28CDA8318FDE743006C4275 /* Chewy.m */; };
+		D28CDA8718FDEC4A006C4275 /* ChewyView.m in Sources */ = {isa = PBXBuildFile; fileRef = D28CDA8618FDEC4A006C4275 /* ChewyView.m */; };
+		D28CDA8A18FDECDB006C4275 /* Messages.m in Sources */ = {isa = PBXBuildFile; fileRef = D28CDA8918FDECDB006C4275 /* Messages.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D28CDA6D18FDE4DC006C4275 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D28CDA4518FDE4DC006C4275 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D28CDA4C18FDE4DC006C4275;
+			remoteInfo = Chewy;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		D28CDA4D18FDE4DC006C4275 /* Chewy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chewy.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D28CDA5018FDE4DC006C4275 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D28CDA5218FDE4DC006C4275 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		D28CDA5418FDE4DC006C4275 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		D28CDA5818FDE4DC006C4275 /* Chewy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Chewy-Info.plist"; sourceTree = "<group>"; };
+		D28CDA5A18FDE4DC006C4275 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D28CDA5C18FDE4DC006C4275 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D28CDA5E18FDE4DC006C4275 /* Chewy-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Chewy-Prefix.pch"; sourceTree = "<group>"; };
+		D28CDA5F18FDE4DC006C4275 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		D28CDA6018FDE4DC006C4275 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		D28CDA6218FDE4DC006C4275 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		D28CDA6818FDE4DC006C4275 /* ChewyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChewyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D28CDA6918FDE4DC006C4275 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		D28CDA7118FDE4DC006C4275 /* ChewyTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ChewyTests-Info.plist"; sourceTree = "<group>"; };
+		D28CDA7318FDE4DC006C4275 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D28CDA7518FDE4DC006C4275 /* ChewyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChewyTests.m; sourceTree = "<group>"; };
+		D28CDA7F18FDE54C006C4275 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		D28CDA8018FDE54C006C4275 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		D28CDA8218FDE743006C4275 /* Chewy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chewy.h; sourceTree = "<group>"; };
+		D28CDA8318FDE743006C4275 /* Chewy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chewy.m; sourceTree = "<group>"; };
+		D28CDA8518FDEC4A006C4275 /* ChewyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChewyView.h; sourceTree = "<group>"; };
+		D28CDA8618FDEC4A006C4275 /* ChewyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChewyView.m; sourceTree = "<group>"; };
+		D28CDA8818FDECDB006C4275 /* Messages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Messages.h; sourceTree = "<group>"; };
+		D28CDA8918FDECDB006C4275 /* Messages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Messages.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D28CDA4A18FDE4DC006C4275 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D28CDA5318FDE4DC006C4275 /* CoreGraphics.framework in Frameworks */,
+				D28CDA5518FDE4DC006C4275 /* UIKit.framework in Frameworks */,
+				D28CDA5118FDE4DC006C4275 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D28CDA6518FDE4DC006C4275 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D28CDA6A18FDE4DC006C4275 /* XCTest.framework in Frameworks */,
+				D28CDA6C18FDE4DC006C4275 /* UIKit.framework in Frameworks */,
+				D28CDA6B18FDE4DC006C4275 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D28CDA4418FDE4DC006C4275 = {
+			isa = PBXGroup;
+			children = (
+				D28CDA5618FDE4DC006C4275 /* Chewy */,
+				D28CDA6F18FDE4DC006C4275 /* ChewyTests */,
+				D28CDA4F18FDE4DC006C4275 /* Frameworks */,
+				D28CDA4E18FDE4DC006C4275 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D28CDA4E18FDE4DC006C4275 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D28CDA4D18FDE4DC006C4275 /* Chewy.app */,
+				D28CDA6818FDE4DC006C4275 /* ChewyTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D28CDA4F18FDE4DC006C4275 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D28CDA5018FDE4DC006C4275 /* Foundation.framework */,
+				D28CDA5218FDE4DC006C4275 /* CoreGraphics.framework */,
+				D28CDA5418FDE4DC006C4275 /* UIKit.framework */,
+				D28CDA6918FDE4DC006C4275 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D28CDA5618FDE4DC006C4275 /* Chewy */ = {
+			isa = PBXGroup;
+			children = (
+				D28CDA5F18FDE4DC006C4275 /* AppDelegate.h */,
+				D28CDA6018FDE4DC006C4275 /* AppDelegate.m */,
+				D28CDA6218FDE4DC006C4275 /* Images.xcassets */,
+				D28CDA5718FDE4DC006C4275 /* Supporting Files */,
+				D28CDA7F18FDE54C006C4275 /* MainViewController.h */,
+				D28CDA8018FDE54C006C4275 /* MainViewController.m */,
+				D28CDA8218FDE743006C4275 /* Chewy.h */,
+				D28CDA8318FDE743006C4275 /* Chewy.m */,
+				D28CDA8518FDEC4A006C4275 /* ChewyView.h */,
+				D28CDA8618FDEC4A006C4275 /* ChewyView.m */,
+				D28CDA8818FDECDB006C4275 /* Messages.h */,
+				D28CDA8918FDECDB006C4275 /* Messages.m */,
+			);
+			path = Chewy;
+			sourceTree = "<group>";
+		};
+		D28CDA5718FDE4DC006C4275 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D28CDA5818FDE4DC006C4275 /* Chewy-Info.plist */,
+				D28CDA5918FDE4DC006C4275 /* InfoPlist.strings */,
+				D28CDA5C18FDE4DC006C4275 /* main.m */,
+				D28CDA5E18FDE4DC006C4275 /* Chewy-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D28CDA6F18FDE4DC006C4275 /* ChewyTests */ = {
+			isa = PBXGroup;
+			children = (
+				D28CDA7518FDE4DC006C4275 /* ChewyTests.m */,
+				D28CDA7018FDE4DC006C4275 /* Supporting Files */,
+			);
+			path = ChewyTests;
+			sourceTree = "<group>";
+		};
+		D28CDA7018FDE4DC006C4275 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D28CDA7118FDE4DC006C4275 /* ChewyTests-Info.plist */,
+				D28CDA7218FDE4DC006C4275 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D28CDA4C18FDE4DC006C4275 /* Chewy */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D28CDA7918FDE4DC006C4275 /* Build configuration list for PBXNativeTarget "Chewy" */;
+			buildPhases = (
+				D28CDA4918FDE4DC006C4275 /* Sources */,
+				D28CDA4A18FDE4DC006C4275 /* Frameworks */,
+				D28CDA4B18FDE4DC006C4275 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Chewy;
+			productName = Chewy;
+			productReference = D28CDA4D18FDE4DC006C4275 /* Chewy.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D28CDA6718FDE4DC006C4275 /* ChewyTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D28CDA7C18FDE4DC006C4275 /* Build configuration list for PBXNativeTarget "ChewyTests" */;
+			buildPhases = (
+				D28CDA6418FDE4DC006C4275 /* Sources */,
+				D28CDA6518FDE4DC006C4275 /* Frameworks */,
+				D28CDA6618FDE4DC006C4275 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D28CDA6E18FDE4DC006C4275 /* PBXTargetDependency */,
+			);
+			name = ChewyTests;
+			productName = ChewyTests;
+			productReference = D28CDA6818FDE4DC006C4275 /* ChewyTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D28CDA4518FDE4DC006C4275 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "Oleg Osin";
+				TargetAttributes = {
+					D28CDA6718FDE4DC006C4275 = {
+						TestTargetID = D28CDA4C18FDE4DC006C4275;
+					};
+				};
+			};
+			buildConfigurationList = D28CDA4818FDE4DC006C4275 /* Build configuration list for PBXProject "Chewy" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = D28CDA4418FDE4DC006C4275;
+			productRefGroup = D28CDA4E18FDE4DC006C4275 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D28CDA4C18FDE4DC006C4275 /* Chewy */,
+				D28CDA6718FDE4DC006C4275 /* ChewyTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D28CDA4B18FDE4DC006C4275 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D28CDA5B18FDE4DC006C4275 /* InfoPlist.strings in Resources */,
+				D28CDA6318FDE4DC006C4275 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D28CDA6618FDE4DC006C4275 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D28CDA7418FDE4DC006C4275 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D28CDA4918FDE4DC006C4275 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D28CDA8718FDEC4A006C4275 /* ChewyView.m in Sources */,
+				D28CDA8A18FDECDB006C4275 /* Messages.m in Sources */,
+				D28CDA6118FDE4DC006C4275 /* AppDelegate.m in Sources */,
+				D28CDA8118FDE54C006C4275 /* MainViewController.m in Sources */,
+				D28CDA8418FDE743006C4275 /* Chewy.m in Sources */,
+				D28CDA5D18FDE4DC006C4275 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D28CDA6418FDE4DC006C4275 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D28CDA7618FDE4DC006C4275 /* ChewyTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D28CDA6E18FDE4DC006C4275 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D28CDA4C18FDE4DC006C4275 /* Chewy */;
+			targetProxy = D28CDA6D18FDE4DC006C4275 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		D28CDA5918FDE4DC006C4275 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D28CDA5A18FDE4DC006C4275 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		D28CDA7218FDE4DC006C4275 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D28CDA7318FDE4DC006C4275 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D28CDA7718FDE4DC006C4275 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D28CDA7818FDE4DC006C4275 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D28CDA7A18FDE4DC006C4275 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Chewy/Chewy-Prefix.pch";
+				INFOPLIST_FILE = "Chewy/Chewy-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		D28CDA7B18FDE4DC006C4275 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Chewy/Chewy-Prefix.pch";
+				INFOPLIST_FILE = "Chewy/Chewy-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		D28CDA7D18FDE4DC006C4275 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Chewy.app/Chewy";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Chewy/Chewy-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "ChewyTests/ChewyTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		D28CDA7E18FDE4DC006C4275 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Chewy.app/Chewy";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Chewy/Chewy-Prefix.pch";
+				INFOPLIST_FILE = "ChewyTests/ChewyTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D28CDA4818FDE4DC006C4275 /* Build configuration list for PBXProject "Chewy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D28CDA7718FDE4DC006C4275 /* Debug */,
+				D28CDA7818FDE4DC006C4275 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D28CDA7918FDE4DC006C4275 /* Build configuration list for PBXNativeTarget "Chewy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D28CDA7A18FDE4DC006C4275 /* Debug */,
+				D28CDA7B18FDE4DC006C4275 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D28CDA7C18FDE4DC006C4275 /* Build configuration list for PBXNativeTarget "ChewyTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D28CDA7D18FDE4DC006C4275 /* Debug */,
+				D28CDA7E18FDE4DC006C4275 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D28CDA4518FDE4DC006C4275 /* Project object */;
+}
