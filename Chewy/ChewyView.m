@@ -33,6 +33,9 @@
 
             offset += 80;
         }
+        
+        [_messages addObserver:self forKeyPath:@"recentMessages" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
+
     }
     return self;
 }
@@ -42,6 +45,16 @@
     _messages = data;
     
     return [self initWithFrame:frame];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if([keyPath isEqualToString:@"recentMessages"])
+    {
+//        NSString* oldC = [change objectForKey:NSKeyValueChangeOldKey];
+        NSString* newMessage = [change objectForKey:NSKeyValueChangeNewKey];
+        // update _messageViews
+    }
 }
 
 @end

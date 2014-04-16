@@ -27,12 +27,22 @@
     _chewyView = [[ChewyView alloc] initWithData:_messages frame:self.view.frame];
     [self.view addSubview:_chewyView];
     
+    UIButton* adminButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    adminButton.frame = CGRectMake(100, 200ws , 60, 20);
+    [adminButton setTitle:@"Admin" forState:UIControlStateNormal];
+    [adminButton addTarget:self action:@selector(showAdminController) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:adminButton];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)showAdminController
+{
+    
 }
 
 @end
