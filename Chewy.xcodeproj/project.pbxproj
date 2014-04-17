@@ -23,6 +23,8 @@
 		D28CDA8418FDE743006C4275 /* Chewy.m in Sources */ = {isa = PBXBuildFile; fileRef = D28CDA8318FDE743006C4275 /* Chewy.m */; };
 		D28CDA8718FDEC4A006C4275 /* ChewyView.m in Sources */ = {isa = PBXBuildFile; fileRef = D28CDA8618FDEC4A006C4275 /* ChewyView.m */; };
 		D28CDA8A18FDECDB006C4275 /* Messages.m in Sources */ = {isa = PBXBuildFile; fileRef = D28CDA8918FDECDB006C4275 /* Messages.m */; };
+		D28CDA8D18FF8C96006C4275 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D28CDA8C18FF8C96006C4275 /* LoginViewController.m */; };
+		D28CDA9018FF94F8006C4275 /* AdminViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D28CDA8F18FF94F8006C4275 /* AdminViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +62,10 @@
 		D28CDA8618FDEC4A006C4275 /* ChewyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChewyView.m; sourceTree = "<group>"; };
 		D28CDA8818FDECDB006C4275 /* Messages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Messages.h; sourceTree = "<group>"; };
 		D28CDA8918FDECDB006C4275 /* Messages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Messages.m; sourceTree = "<group>"; };
+		D28CDA8B18FF8C96006C4275 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		D28CDA8C18FF8C96006C4275 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		D28CDA8E18FF94F8006C4275 /* AdminViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdminViewController.h; sourceTree = "<group>"; };
+		D28CDA8F18FF94F8006C4275 /* AdminViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdminViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +137,10 @@
 				D28CDA8618FDEC4A006C4275 /* ChewyView.m */,
 				D28CDA8818FDECDB006C4275 /* Messages.h */,
 				D28CDA8918FDECDB006C4275 /* Messages.m */,
+				D28CDA8B18FF8C96006C4275 /* LoginViewController.h */,
+				D28CDA8C18FF8C96006C4275 /* LoginViewController.m */,
+				D28CDA8E18FF94F8006C4275 /* AdminViewController.h */,
+				D28CDA8F18FF94F8006C4275 /* AdminViewController.m */,
 			);
 			path = Chewy;
 			sourceTree = "<group>";
@@ -259,7 +269,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D28CDA9018FF94F8006C4275 /* AdminViewController.m in Sources */,
 				D28CDA8718FDEC4A006C4275 /* ChewyView.m in Sources */,
+				D28CDA8D18FF8C96006C4275 /* LoginViewController.m in Sources */,
 				D28CDA8A18FDECDB006C4275 /* Messages.m in Sources */,
 				D28CDA6118FDE4DC006C4275 /* AppDelegate.m in Sources */,
 				D28CDA8118FDE54C006C4275 /* MainViewController.m in Sources */,

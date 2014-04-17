@@ -9,6 +9,7 @@
 #import "MainViewController.h"
 #import "ChewyView.h"
 #import "Messages.h"
+#import "LoginViewController.h"
 
 @implementation MainViewController {
     ChewyView* _chewyView;
@@ -28,10 +29,12 @@
     [self.view addSubview:_chewyView];
     
     UIButton* adminButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    adminButton.frame = CGRectMake(100, 200ws , 60, 20);
+    adminButton.frame = CGRectMake(100, 200 , 60, 20);
     [adminButton setTitle:@"Admin" forState:UIControlStateNormal];
     [adminButton addTarget:self action:@selector(showAdminController) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:adminButton];
+    
+    self.navigationItem.title = @"Chewy";
 }
 
 - (void)didReceiveMemoryWarning
@@ -42,7 +45,8 @@
 
 - (void)showAdminController
 {
-    
+    LoginViewController* controller = [[LoginViewController alloc] init];
+    [self.navigationController pushViewController:controller animated:NO];
 }
 
 @end
