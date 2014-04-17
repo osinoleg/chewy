@@ -12,6 +12,12 @@ function process_request($request)
         case "get_registered_devices":
             return get_registered_devices($request);
         break;
+        case "add_user":
+            return add_user($request);
+        break;
+        case "send_push":
+            return send_push($request);
+        break;
         case "register_device":
             return register_device($request);
         break;
@@ -46,6 +52,107 @@ function register_device($request)
         }
 
         $result = mysql_query("INSERT into devices (device_id) VALUES('$device_id');", $link);
+
+        mysql_close($link);
+
+        return json_encode($result);
+    }
+}
+
+function send_push($request)
+{
+    $user = isset($request['user']) ? $request['user'] : "";
+    $password = isset($request['password']) ? $request['password'] : "";
+    $message = isset($request['message']) ? $request['message'] : "";
+
+    if (!$message)
+        return "Specify a message";
+
+    if (!$user || !$password)
+        return "Specify a user and password";
+
+    $password = md5($password);
+
+    $link = mysql_connect("localhost");
+    if (!$link)
+        return "Unable to connect to local DB";
+
+    if (!mysql_select_db('chewy', $link))
+    {
+        mysql_close($link);
+        return "Unable to use DB chewy";
+    }
+
+    $resource = mysql_query("SELECT * FROM users where user = '$user' and password = '$password';", $link);
+    $results = array();
+    while($row = mysql_fetch_array($resource, MYSQL_ASSOC))
+        $results[] = $row;
+
+    if (!$results)
+    {
+        mysql_close($link);
+        return "Invalid user password combo";
+    }
+
+    // Get devices
+    $resource = mysql_query("SELECT * FROM devices;");
+    $results = array();
+    while($row = mysql_fetch_array($resource, MYSQL_ASSOC))
+        $results[] = $row;
+
+    // Send the push!
+    $ctx = stream_context_create();
+    stream_context_set_option($ctx, 'ssl', 'local_cert', 'final.pem');
+    stream_context_set_option($ctx, 'ssl', 'passphrase', 'chewy');
+    $fp = stream_socket_client('ssl://gateway.sandbox.push.apple.com:2195', $err,
+        $errstr, 60, STREAM_CLIENT_CONNECT | STREAM_CLIENT_PERSISTENT, $ctx);
+
+    if (!$fp)
+        return "Failed to connect: $eer $errstr";
+
+    $body = array();
+    $body['aps'] = array(
+        'alert' => $message
+    );
+
+    $payload = json_encode($body);
+
+    $errors = array();
+    foreach($results as $device_row)
+    {
+        $msg = chr(0) . pack('n', 32) . pack('H*', $device_row['device_id']) . pack('n', strlen($payload)) . $payload;
+        $sent = fwrite($fp, $msg, strlen($msg));
+        if (!$sent)
+            $errors[] = "Failed to send push to device_id: $device_row[device_id]";
+    }
+
+    fclose($fp);
+    
+    mysql_close($link);
+
+    return json_encode($errors);
+}
+
+function add_user($request)
+{
+    $user = isset($request['user']) ? $request['user'] : "";
+    $password = isset($request['password']) ? $request['password'] : "";
+
+    if ($user && $password)
+    {
+        $password = md5($password);
+
+        $link = mysql_connect("localhost");
+        if (!$link)
+            return "Unable to connect to local DB";
+
+        if (!mysql_select_db('chewy', $link))
+        {
+            mysql_close($link);
+            return "Unable to use DB chewy";
+        }
+
+        $result = mysql_query("INSERT into users (user, password) VALUES('$user', '$password');", $link);
 
         mysql_close($link);
 
