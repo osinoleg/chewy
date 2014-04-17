@@ -83,6 +83,8 @@
 
     AdminViewController* controller = [[AdminViewController alloc] init];
     [navController pushViewController:controller animated:NO];
+    
+    _loggedIn = YES;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField

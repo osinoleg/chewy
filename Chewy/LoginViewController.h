@@ -10,4 +10,6 @@
 
 @interface LoginViewController : UIViewController <UITextFieldDelegate>
 
+@property (nonatomic, readonly) BOOL loggedIn;
+
 @end

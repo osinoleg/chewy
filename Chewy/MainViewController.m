@@ -10,10 +10,12 @@
 #import "ChewyView.h"
 #import "Messages.h"
 #import "LoginViewController.h"
+#import "AdminViewController.h"
 
 @implementation MainViewController {
     ChewyView* _chewyView;
     Messages* _messages;
+    LoginViewController* _loginController;
 }
 
 
@@ -28,13 +30,10 @@
     _chewyView = [[ChewyView alloc] initWithData:_messages frame:self.view.frame];
     [self.view addSubview:_chewyView];
     
-    UIButton* adminButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    adminButton.frame = CGRectMake(100, 200, 60, 20);
-    [adminButton setTitle:@"Admin" forState:UIControlStateNormal];
-    [adminButton addTarget:self action:@selector(showAdminController) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:adminButton];
-    
     self.navigationItem.title = @"Chewy";
+    
+    UIBarButtonItem *admin = [[UIBarButtonItem alloc] initWithTitle:@"Admin" style:UIBarButtonItemStylePlain target:self action:@selector(admin)];
+    self.navigationItem.rightBarButtonItem = admin;
 }
 
 - (void)didReceiveMemoryWarning
@@ -43,10 +42,20 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)showAdminController
+- (void)admin
 {
-    LoginViewController* controller = [[LoginViewController alloc] init];
-    [self.navigationController pushViewController:controller animated:NO];
+    if(_loginController == nil)
+        _loginController = [[LoginViewController alloc] init];
+    
+    if(_loginController.loggedIn)
+    {
+        AdminViewController* controller = [[AdminViewController alloc] init];
+        [self.navigationController pushViewController:controller animated:NO];
+    }
+    else
+    {
+        [self.navigationController pushViewController:_loginController animated:NO];
+    }
 }
 
 @end
