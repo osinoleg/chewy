@@ -125,22 +125,13 @@
 		D28CDA5618FDE4DC006C4275 /* Chewy */ = {
 			isa = PBXGroup;
 			children = (
+				D2FF84B218FFBBAB003296BC /* Controllers */,
+				D2FF84B118FFBB9F003296BC /* Views */,
+				D2FF84B018FFBB87003296BC /* Models */,
 				D28CDA5F18FDE4DC006C4275 /* AppDelegate.h */,
 				D28CDA6018FDE4DC006C4275 /* AppDelegate.m */,
 				D28CDA6218FDE4DC006C4275 /* Images.xcassets */,
 				D28CDA5718FDE4DC006C4275 /* Supporting Files */,
-				D28CDA7F18FDE54C006C4275 /* MainViewController.h */,
-				D28CDA8018FDE54C006C4275 /* MainViewController.m */,
-				D28CDA8218FDE743006C4275 /* Chewy.h */,
-				D28CDA8318FDE743006C4275 /* Chewy.m */,
-				D28CDA8518FDEC4A006C4275 /* ChewyView.h */,
-				D28CDA8618FDEC4A006C4275 /* ChewyView.m */,
-				D28CDA8818FDECDB006C4275 /* Messages.h */,
-				D28CDA8918FDECDB006C4275 /* Messages.m */,
-				D28CDA8B18FF8C96006C4275 /* LoginViewController.h */,
-				D28CDA8C18FF8C96006C4275 /* LoginViewController.m */,
-				D28CDA8E18FF94F8006C4275 /* AdminViewController.h */,
-				D28CDA8F18FF94F8006C4275 /* AdminViewController.m */,
 			);
 			path = Chewy;
 			sourceTree = "<group>";
@@ -172,6 +163,39 @@
 				D28CDA7218FDE4DC006C4275 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D2FF84B018FFBB87003296BC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D28CDA8218FDE743006C4275 /* Chewy.h */,
+				D28CDA8318FDE743006C4275 /* Chewy.m */,
+				D28CDA8818FDECDB006C4275 /* Messages.h */,
+				D28CDA8918FDECDB006C4275 /* Messages.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		D2FF84B118FFBB9F003296BC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D28CDA8518FDEC4A006C4275 /* ChewyView.h */,
+				D28CDA8618FDEC4A006C4275 /* ChewyView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		D2FF84B218FFBBAB003296BC /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D28CDA7F18FDE54C006C4275 /* MainViewController.h */,
+				D28CDA8018FDE54C006C4275 /* MainViewController.m */,
+				D28CDA8B18FF8C96006C4275 /* LoginViewController.h */,
+				D28CDA8C18FF8C96006C4275 /* LoginViewController.m */,
+				D28CDA8E18FF94F8006C4275 /* AdminViewController.h */,
+				D28CDA8F18FF94F8006C4275 /* AdminViewController.m */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

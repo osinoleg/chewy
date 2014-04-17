@@ -10,4 +10,12 @@
 
 @implementation Messages
 
+- (void)parseData:(NSData*)data
+{
+    for(int i = 0; i < 3; i++)
+    {
+        [_recentMessages addObject:[NSString stringWithFormat:@"msg: %i", i]];
+    }
+}
+
 @end
