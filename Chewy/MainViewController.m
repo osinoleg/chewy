@@ -17,15 +17,17 @@
     LoginViewController* _loginController;
     UITableView* _messageView;
     NSMutableData* _responseData;
+    Chewy* _chewyAnimModel;
 }
 
 - (id)init
 {
     if(self = [super init])
     {
+        _chewyAnimModel = [[Chewy alloc] init];
         _messages = [[Messages alloc] init];
-        NSMutableArray* sampleMsgs = [NSMutableArray arrayWithArray:@[@"msg 1", @"msg 2", @"msg 3"]];
-        _messages.recentMessages = sampleMsgs;
+//        NSMutableArray* sampleMsgs = [NSMutableArray arrayWithArray:@[@"msg 1", @"msg 2", @"msg 3"]];
+//        _messages.recentMessages = sampleMsgs;
         
         return self;
     }
@@ -37,22 +39,18 @@
 {
     [super viewDidLoad];
     
-    
-
-    [_messages addObserver:self forKeyPath:@"recentMessages"
-                   options:NSKeyValueObservingOptionNew  context:nil];
-    
     int topOffset = 20 + self.navigationController.navigationBar.frame.size.height;
     
-    //_chewyView = [[ChewyView alloc] initWithData:_messages frame:self.view.frame];
-    //[self.view addSubview:_chewyView];
+    CGRect chewyViewFrame = CGRectMake(0, topOffset, self.view.frame.size.width, 200);
+    _chewyView = [[ChewyView alloc] initWithData:_chewyAnimModel frame:chewyViewFrame];
+    [self.view addSubview:_chewyView];
     
     UIButton* simulatePushNotification = [UIButton buttonWithType:UIButtonTypeSystem];
     [simulatePushNotification setTitle:@"Simulate" forState:UIControlStateNormal];
     [simulatePushNotification addTarget:self action:@selector(simulatePushNotification) forControlEvents:UIControlEventTouchUpInside];
     simulatePushNotification.frame = CGRectMake(10, topOffset + 10, 100, 30);
     simulatePushNotification.layer.borderWidth = 1.0f;
-    [self.view addSubview:simulatePushNotification];
+    //[self.view addSubview:simulatePushNotification]; // for debug only
     
     self.navigationItem.title = @"Chewy";
     
@@ -71,6 +69,11 @@
     [_messageView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"messageCell"];
 
     [self.view addSubview:_messageView];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(receiveMessages:)
+                                                 name:@"MessagesChangedNotification"
+                                               object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -124,23 +127,37 @@
     
 }
 
-# pragma mark kvo
+# pragma mark NSNotifications
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+- (void)receiveMessages:(NSNotification *)notification
 {
-    if([keyPath isEqualToString:@"recentMessages"])
+    if([[notification name] isEqualToString:@"MessagesChangedNotification"])
     {
-        //        NSString* oldC = [change objectForKey:NSKeyValueChangeOldKey];
-        NSString* newMessage = [change objectForKey:NSKeyValueChangeNewKey];
-        // update _messageViews
-        
+        NSLog (@"Got new messages to display");
         [_messageView reloadData];
     }
-    
-
 }
 
-# pragma mark connection
+# pragma mark Touches
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    
+    CGPoint locationPoint = [[touches anyObject] locationInView:self.view];
+    UIView* touchedView = [self.view hitTest:locationPoint withEvent:event];
+    
+    if(touchedView == _chewyView)
+    {
+        [_chewyAnimModel playAnim:CHEWY_SPIN_ANIM];
+    }
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    
+}
+
+# pragma mark NSURLConnection
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
@@ -153,8 +170,9 @@
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
     // Append the new data to the instance variable you declared
-    
-    [_messages parseData:data];
+    //NSString *alertValue = [[data valueForKey:@"aps"] valueForKey:@"alert"];
+    //NSDictionary* temp = [NSDictionary dictionaryWithObjectsAndKeys:@", nil]
+    //[_messages parseData:data];
 }
 
 - (NSCachedURLResponse *)connection:(NSURLConnection *)connection
@@ -176,7 +194,6 @@
     // The request has failed for some reason!
     // Check the error var
 }
-
 
 - (void)simulatePushNotification
 {

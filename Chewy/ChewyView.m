@@ -11,9 +11,8 @@
 #define MAX_VISIBLE_MSGS 3
 
 @implementation ChewyView {
-    UIView* _placeHolderForChewy;
-    NSMutableArray* _messageViews;
-    Messages* _messages;
+    UIImageView* _chewy;
+    Chewy* _chewyAnimModel;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -21,39 +20,49 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        int offset = 80;
-        int cnt = ([_messages.recentMessages count] < MAX_VISIBLE_MSGS) ? [_messages.recentMessages count] : MAX_VISIBLE_MSGS;
-        for(int i = 0; i < cnt; i++)
-        {
-            UILabel* msg = [[UILabel alloc] initWithFrame:CGRectMake(10, offset, frame.size.width, 40)];
-            msg.text = [_messages.recentMessages objectAtIndex:i];
-            [self addSubview:msg];
-            
-            [_messageViews addObject:msg];
-
-            offset += 80;
-        }
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(handleChewyAnimation:)
+                                                     name:@"ChewyAnimationBeganNotification"
+                                                   object:nil];
         
-        [_messages addObserver:self forKeyPath:@"recentMessages" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(handleChewyAnimation:)
+                                                     name:@"ChewyAnimationUpdatedNotification"
+                                                   object:nil];
+
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(handleChewyAnimation:)
+                                                     name:@"ChewyAnimationEndedNotification"
+                                                   object:nil];
+        
+        _chewy = [[UIImageView alloc] initWithImage:_chewyAnimModel.curFrame];
+        _chewy.contentMode = UIViewContentModeScaleAspectFit;
+        _chewy.frame = CGRectMake(0, 0, 80, 133);
+        [self addSubview:_chewy];
 
     }
     return self;
 }
 
-- (id)initWithData:(Messages*)data frame:(CGRect)frame
+- (id)initWithData:(Chewy*)chewy frame:(CGRect)frame
 {    
-    _messages = data;
-    
+    _chewyAnimModel = chewy;
     return [self initWithFrame:frame];
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+- (void)handleChewyAnimation:(NSNotification*)notification
 {
-    if([keyPath isEqualToString:@"recentMessages"])
+    if([[notification name] isEqualToString:@"ChewyAnimationBeganNotification"])
     {
-//        NSString* oldC = [change objectForKey:NSKeyValueChangeOldKey];
-        NSString* newMessage = [change objectForKey:NSKeyValueChangeNewKey];
-        // update _messageViews
+        //
+    }
+    else if([[notification name] isEqualToString:@"ChewyAnimationUpdatedNotification"])
+    {
+        _chewy.image = _chewyAnimModel.curFrame;
+    }
+    else if([[notification name] isEqualToString:@"ChewyAnimationEndedNotification"])
+    {
+        _chewy.image = _chewyAnimModel.curFrame;
     }
 }
 
