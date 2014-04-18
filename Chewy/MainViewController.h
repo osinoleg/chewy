@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Messages.h"
 
 @interface MainViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, NSURLConnectionDelegate>
+
+@property(nonatomic) Messages* messages;
 
 @end

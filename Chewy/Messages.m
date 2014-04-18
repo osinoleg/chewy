@@ -10,12 +10,28 @@
 
 @implementation Messages
 
-- (void)parseData:(NSData*)data
+- (void)parseData:(NSDictionary*)data
 {
-    for(int i = 0; i < 3; i++)
-    {
-        [_recentMessages addObject:[NSString stringWithFormat:@"msg: %i", i]];
-    }
+    /* sample json data */
+    /*
+     {
+     "aps":
+     {
+     "alert": "SENDER_NAME: MESSAGE_TEXT",
+     "sound": "default"
+     },
+     }
+     */
+    
+    NSString *alertValue = [[data valueForKey:@"aps"] valueForKey:@"alert"];
+	NSMutableArray *parts = [NSMutableArray arrayWithArray:[alertValue componentsSeparatedByString:@": "]];
+	
+    NSString* senderName = [parts objectAtIndex:0]; // todo: display this?
+    [parts removeObjectAtIndex:0];
+
+	NSString* message = [parts componentsJoinedByString:@": "];
+    
+	[_recentMessages insertObject:message atIndex:0];
 }
 
 @end

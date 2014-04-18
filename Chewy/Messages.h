@@ -12,6 +12,6 @@
 
 @property (nonatomic) NSMutableArray* recentMessages;
 
-- (void)parseData:(NSData*)data;
+- (void)parseData:(NSDictionary*)data;
 
 @end

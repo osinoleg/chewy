@@ -63,7 +63,7 @@
                                      labelSize.width, labelSize.height);
     [submitButton setTitle:@"Log In" forState:UIControlStateNormal];
     submitButton.layer.backgroundColor = [UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1.0].CGColor;
-    [submitButton addTarget:self action:@selector(login) forControlEvents:UIControlEventTouchUpInside];
+    [submitButton addTarget:self action:@selector(validateUser) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:submitButton];
 }
 
@@ -75,9 +75,6 @@
 
 - (void)login
 {
-    [_passwordField resignFirstResponder];
-    [_userNameField resignFirstResponder];
-    
     UINavigationController* navController = self.navigationController;
     [self.navigationController popToRootViewControllerAnimated:NO];
 
@@ -85,6 +82,18 @@
     [navController pushViewController:controller animated:NO];
     
     _loggedIn = YES;
+}
+
+- (void)validateUser
+{
+    [_passwordField resignFirstResponder];
+    [_userNameField resignFirstResponder];
+    
+    // Validate user
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://google.com"]];
+    
+    // Create url connection and fire request
+    NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
@@ -104,6 +113,42 @@
         [textField resignFirstResponder];
     }
     return YES;
+}
+
+# pragma mark NSURLConnection
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+{
+    // A response has been received, this is where we initialize the instance var you created
+    // so that we can append data to it in the didReceiveData method
+    // Furthermore, this method is called each time there is a redirect so reinitializing it
+    // also serves to clear it
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+{
+    // Append the new data to the instance variable you declared
+    [self login];
+}
+
+- (NSCachedURLResponse *)connection:(NSURLConnection *)connection
+                  willCacheResponse:(NSCachedURLResponse*)cachedResponse
+{
+    // Return nil to indicate not necessary to store a cached response for this connection
+    return nil;
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+    // The request is complete and data has been received
+    // You can parse the stuff in your instance variable now
+    
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+{
+    // The request has failed for some reason!
+    // Check the error var
 }
 
 @end

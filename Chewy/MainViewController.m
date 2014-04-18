@@ -14,20 +14,30 @@
 
 @implementation MainViewController {
     ChewyView* _chewyView;
-    Messages* _messages;
     LoginViewController* _loginController;
     UITableView* _messageView;
     NSMutableData* _responseData;
 }
 
+- (id)init
+{
+    if(self = [super init])
+    {
+        _messages = [[Messages alloc] init];
+        NSMutableArray* sampleMsgs = [NSMutableArray arrayWithArray:@[@"msg 1", @"msg 2", @"msg 3"]];
+        _messages.recentMessages = sampleMsgs;
+        
+        return self;
+    }
+
+    return self;
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    _messages = [[Messages alloc] init];
-    NSMutableArray* sampleMsgs = [NSMutableArray arrayWithArray:@[@"msg 1", @"msg 2", @"msg 3"]];
-    _messages.recentMessages = sampleMsgs;
+    
 
     [_messages addObserver:self forKeyPath:@"recentMessages"
                    options:NSKeyValueObservingOptionNew  context:nil];

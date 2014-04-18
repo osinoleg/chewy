@@ -10,6 +10,6 @@
 
 @interface Chewy : NSObject
 
-@property (nonatomic) UIImage* chewySprite;
+@property (nonatomic) UIImage* curFrame;
 
 @end

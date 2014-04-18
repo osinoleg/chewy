@@ -9,18 +9,40 @@
 #import "AppDelegate.h"
 #import "MainViewController.h"
 
-@implementation AppDelegate
+@implementation AppDelegate {
+    MainViewController* _mainViewController;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
-    MainViewController* viewController = [[MainViewController alloc] init];
-    UINavigationController* navController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    _mainViewController = [[MainViewController alloc] init];
+    UINavigationController* navController = [[UINavigationController alloc] initWithRootViewController:_mainViewController];
     self.window.rootViewController = navController;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert];
+    
+    if(launchOptions != nil)
+	{
+		NSDictionary *dictionary = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+		if (dictionary != nil)
+		{
+			NSLog(@"Launched from push notification: %@", dictionary);
+			[self addMessageFromRemoteNotification:dictionary];
+		}
+	}
+    
     return YES;
+}
+
+
+- (void)application:(UIApplication*)application didReceiveRemoteNotification:(NSDictionary*)userInfo
+{
+	NSLog(@"Received notification: %@", userInfo);
+	[self addMessageFromRemoteNotification:userInfo];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -33,6 +55,11 @@
 {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+}
+
+- (void)addMessageFromRemoteNotification:(NSDictionary*)userInfo
+{
+    [_mainViewController.messages parseData:userInfo];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -48,6 +75,16 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
+{
+	NSLog(@"My token is: %@", deviceToken);
+}
+
+- (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
+{
+	NSLog(@"Failed to get token, error: %@", error);
 }
 
 @end

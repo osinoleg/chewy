@@ -8,7 +8,23 @@
 
 #import "Chewy.h"
 
-@implementation Chewy
+#define CHEWY_SCALE 0.2f
+@implementation Chewy {
+    UIImage* _defaultFrame;
+    NSArray* _spinAnim;
+}
 
+- (id)init
+{
+    if(self = [super init])
+    {
+        _defaultFrame = [UIImage imageNamed:@"chewy1_0"];
+
+        
+        return self;
+    }
+    
+    return self;
+}
 
 @end
