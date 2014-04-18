@@ -8,8 +8,6 @@
 
 #import "ChewyView.h"
 
-#define MAX_VISIBLE_MSGS 3
-
 @implementation ChewyView {
     UIImageView* _chewy;
     Chewy* _chewyAnimModel;
@@ -37,7 +35,13 @@
         
         _chewy = [[UIImageView alloc] initWithImage:_chewyAnimModel.curFrame];
         _chewy.contentMode = UIViewContentModeScaleAspectFit;
-        _chewy.frame = CGRectMake(0, 0, 80, 133);
+        
+        const int width = 80;
+        const int height = 133;
+        int x = frame.size.width * 0.5f - width * 0.5;
+        int y = frame.size.height * 0.5f - height * 0.5;
+        _chewy.frame = CGRectMake(x, y, width, height);
+
         [self addSubview:_chewy];
 
     }
