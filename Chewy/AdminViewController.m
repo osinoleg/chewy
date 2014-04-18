@@ -11,6 +11,7 @@
 @implementation AdminViewController {
     UITextField* _messageField;
     NSString* _message;
+    UILabel* _messageSentStatus;
 }
 
 - (void)viewDidLoad
@@ -46,6 +47,15 @@
     submitButton.layer.backgroundColor = [UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1.0].CGColor;
     [submitButton addTarget:self action:@selector(send) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:submitButton];
+    
+    CGRect labelFrame = CGRectMake(xOffset, submitButton.frame.size.height + submitButton.frame.origin.y + yPadding,
+                                   labelSize.width + 50, labelSize.height);
+    
+    _messageSentStatus = [[UILabel alloc] initWithFrame:labelFrame];
+    _messageSentStatus.text = @"Message Sent Successfully";
+    _messageSentStatus.font = [UIFont systemFontOfSize:10];
+    _messageSentStatus.hidden = YES;
+    [self.view addSubview:_messageSentStatus];
 }
 
 - (void)didReceiveMemoryWarning
@@ -81,6 +91,8 @@
     
     // Create url connection and fire request
     NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    
+    _messageSentStatus.hidden = YES;
 }
 
 # pragma mark NSURLConnection
@@ -97,6 +109,8 @@
 {
     // Append the new data to the instance variable you declared
     NSLog(@"Message sent");
+    _messageSentStatus.hidden = NO;
+    _messageSentStatus.text = @"Message Sent Successfully";
 }
 
 - (NSCachedURLResponse *)connection:(NSURLConnection *)connection
@@ -117,6 +131,9 @@
 {
     // The request has failed for some reason!
     // Check the error var
+    _messageSentStatus.hidden = NO;
+    _messageSentStatus.text = @"Message Failed to send";
+
 }
 
 
