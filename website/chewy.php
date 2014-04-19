@@ -67,8 +67,10 @@ function login($request)
     $user = isset($request['user']) ? $request['user'] : "";
     $password = isset($request['password']) ? $request['password'] : "";
 
+    $result = array('result' => 'false');
+
     if (!$user || !$password)
-        return json_encode(false);
+        return json_encode($result);
 
     $password = md5($password);
 
@@ -79,7 +81,7 @@ function login($request)
     if (!mysql_select_db('chewy', $link))
     {
         mysql_close($link);
-        return "Unable to use DB chewy";
+        return $result;
     }
 
     $resource = mysql_query("SELECT * FROM users where user = '$user' and password = '$password';", $link);
@@ -87,15 +89,12 @@ function login($request)
     while($row = mysql_fetch_array($resource, MYSQL_ASSOC))
         $results[] = $row;
 
-    if (!$results)
-    {
-        mysql_close($link);
-        return json_encode(false);
-    }
+    if ($results)
+        $result['result'] = true;
 
     mysql_close($link);
 
-    return json_encode(true);
+    return json_encode($result);
 }
 
 function send_push($request)
