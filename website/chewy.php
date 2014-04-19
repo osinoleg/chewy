@@ -9,6 +9,9 @@ function process_request($request)
 
     switch($action)
     {
+        case "login":
+            return login($request);
+        break;
         case "get_registered_devices":
             return get_registered_devices($request);
         break;
@@ -59,6 +62,42 @@ function register_device($request)
     }
 }
 
+function login($request)
+{
+    $user = isset($request['user']) ? $request['user'] : "";
+    $password = isset($request['password']) ? $request['password'] : "";
+
+    if (!$user || !$password)
+        return json_encode(false);
+
+    $password = md5($password);
+
+    $link = mysql_connect("localhost");
+    if (!$link)
+        return "Unable to connect to local DB";
+
+    if (!mysql_select_db('chewy', $link))
+    {
+        mysql_close($link);
+        return "Unable to use DB chewy";
+    }
+
+    $resource = mysql_query("SELECT * FROM users where user = '$user' and password = '$password';", $link);
+    $results = array();
+    while($row = mysql_fetch_array($resource, MYSQL_ASSOC))
+        $results[] = $row;
+
+    if (!$results)
+    {
+        mysql_close($link);
+        return json_encode(false);
+    }
+
+    mysql_close($link);
+
+    return json_encode(true);
+}
+
 function send_push($request)
 {
     $user = isset($request['user']) ? $request['user'] : "";
@@ -103,7 +142,7 @@ function send_push($request)
     // Send the push!
     $ctx = stream_context_create();
     stream_context_set_option($ctx, 'ssl', 'local_cert', 'final.pem');
-    stream_context_set_option($ctx, 'ssl', 'passphrase', 'chewy');
+    stream_context_set_option($ctx, 'ssl', 'passphrase', '?oleg?');
     $fp = stream_socket_client('ssl://gateway.sandbox.push.apple.com:2195', $err,
         $errstr, 60, STREAM_CLIENT_CONNECT | STREAM_CLIENT_PERSISTENT, $ctx);
 
@@ -120,7 +159,16 @@ function send_push($request)
     $errors = array();
     foreach($results as $device_row)
     {
-        $msg = chr(0) . pack('n', 32) . pack('H*', $device_row['device_id']) . pack('n', strlen($payload)) . $payload;
+        try
+        {
+            $msg = chr(0) . pack('n', 32) . pack('H*', $device_row['device_id']) . pack('n', strlen($payload)) . $payload;
+        }
+        catch(Exception $e)
+        {
+            $errors[] = "Shitty device id: $device_row[device_id]. gana continue on!";
+            continue;
+        }
+        error_log("msg len = ". strlen($payload) . " payload = " . $payload);
         $sent = fwrite($fp, $msg, strlen($msg));
         if (!$sent)
             $errors[] = "Failed to send push to device_id: $device_row[device_id]";
