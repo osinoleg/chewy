@@ -120,6 +120,7 @@
 {
     // Append the new data to the instance variable you declared
     NSLog(@"Message sent");
+    _messageField.text = @"";
     _messageSentStatus.hidden = NO;
     _messageSentStatus.text = @"Message Sent Successfully";
 }

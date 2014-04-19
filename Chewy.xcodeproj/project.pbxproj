@@ -46,7 +46,7 @@
 		D27203461900D1FF00B100FF /* chewy1_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chewy1_1.png; sourceTree = "<group>"; };
 		D27203471900D1FF00B100FF /* chewy1_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chewy1_2.png; sourceTree = "<group>"; };
 		D27203481900D1FF00B100FF /* chewy1_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chewy1_3.png; sourceTree = "<group>"; };
-		D28CDA4D18FDE4DC006C4275 /* Chewy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = Chewy.app; path = chewy.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D28CDA4D18FDE4DC006C4275 /* chewy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = chewy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D28CDA5018FDE4DC006C4275 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D28CDA5218FDE4DC006C4275 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		D28CDA5418FDE4DC006C4275 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -57,7 +57,7 @@
 		D28CDA5F18FDE4DC006C4275 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D28CDA6018FDE4DC006C4275 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		D28CDA6218FDE4DC006C4275 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		D28CDA6818FDE4DC006C4275 /* ChewyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = ChewyTests.xctest; path = chewyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D28CDA6818FDE4DC006C4275 /* chewyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = chewyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D28CDA6918FDE4DC006C4275 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		D28CDA7118FDE4DC006C4275 /* ChewyTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ChewyTests-Info.plist"; sourceTree = "<group>"; };
 		D28CDA7318FDE4DC006C4275 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -124,8 +124,8 @@
 		D28CDA4E18FDE4DC006C4275 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D28CDA4D18FDE4DC006C4275 /* Chewy.app */,
-				D28CDA6818FDE4DC006C4275 /* ChewyTests.xctest */,
+				D28CDA4D18FDE4DC006C4275 /* chewy.app */,
+				D28CDA6818FDE4DC006C4275 /* chewyTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -235,7 +235,7 @@
 			);
 			name = chewy;
 			productName = chewy;
-			productReference = D28CDA4D18FDE4DC006C4275 /* Chewy.app */;
+			productReference = D28CDA4D18FDE4DC006C4275 /* chewy.app */;
 			productType = "com.apple.product-type.application";
 		};
 		D28CDA6718FDE4DC006C4275 /* chewyTests */ = {
@@ -253,7 +253,7 @@
 			);
 			name = chewyTests;
 			productName = chewyTests;
-			productReference = D28CDA6818FDE4DC006C4275 /* ChewyTests.xctest */;
+			productReference = D28CDA6818FDE4DC006C4275 /* chewyTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
