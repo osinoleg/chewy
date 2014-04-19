@@ -10,4 +10,6 @@
 
 @interface AdminViewController : UIViewController <UITextFieldDelegate>
 
+- (id)initWithUseInfo:(NSString*)username password:(NSString*)password;
+
 @end

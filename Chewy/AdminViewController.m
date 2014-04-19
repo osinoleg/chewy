@@ -12,6 +12,20 @@
     UITextField* _messageField;
     NSString* _message;
     UILabel* _messageSentStatus;
+    NSString* _username;
+    NSString* _password;
+}
+
+- (id)initWithUseInfo:(NSString*)username password:(NSString*)password
+{
+    if(self = [super init])
+    {
+        _password = password;
+        _username = username;
+        return self;
+    }
+    
+    return self;
 }
 
 - (void)viewDidLoad
@@ -80,13 +94,10 @@
     [_messageField resignFirstResponder];
     NSLog(@"Sending message: %@", _message);
     
-    NSString* username = @"chewy";
-    NSString* pw = @"chewy";
-    
-    
     NSString* fullRequest = [NSString stringWithFormat:@"http://54.186.181.133/chewy.php?action=send_push&user=%@&password=%@&message=%@",
-                             username, pw,
+                             _username, _password,
                              [_message stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:fullRequest]];
     
     // Create url connection and fire request

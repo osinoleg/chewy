@@ -38,7 +38,8 @@
     _userNameField = [[UITextField alloc] initWithFrame:
                                   CGRectMake(xOffset + labelSize.width + xPadding , topOffset,
                                              textFieldSize.width, textFieldSize.height)];
-    _userNameField.layer.borderWidth = 0.5f;
+    _userNameField.layer.borderWidth = 1.0f;
+    _userNameField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     _userNameField.delegate = self;
     [self.view addSubview:_userNameField];
     
@@ -52,9 +53,10 @@
                                   CGRectMake(xOffset + labelSize.width + xPadding ,
                                              topOffset + textFieldSize.height + labelSize.height + yPadding,
                                              textFieldSize.width, textFieldSize.height)];
-    _passwordField.layer.borderWidth = 0.5f;
+    _passwordField.layer.borderWidth = 1.0f;
     _passwordField.secureTextEntry = YES;
     _passwordField.delegate = self;
+    _passwordField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     [self.view addSubview:_passwordField];
     
     UIButton* submitButton = [UIButton buttonWithType:UIButtonTypeSystem];
@@ -78,7 +80,7 @@
     UINavigationController* navController = self.navigationController;
     [self.navigationController popToRootViewControllerAnimated:NO];
 
-    AdminViewController* controller = [[AdminViewController alloc] init];
+    AdminViewController* controller = [[AdminViewController alloc] initWithUseInfo:_username password:_password];
     [navController pushViewController:controller animated:NO];
     
     _loggedIn = YES;
@@ -90,7 +92,7 @@
     [_userNameField resignFirstResponder];
     
     // Validate user
-    NSString* fullRequest = [NSString stringWithFormat:@"http://54.186.181.133/chewy.php?action=send_push&user=%@&password=%@",
+    NSString* fullRequest = [NSString stringWithFormat:@"http://54.186.181.133/chewy.php?action=login&user=%@&password=%@",
                              _username, _password];
 
     NSURLRequest * urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:fullRequest]];
@@ -100,12 +102,35 @@
                                           returningResponse:&response
                                                       error:&error];
     
+   
     if(error == nil)
     {
-        // Parse data here
+        NSError *jsonParsingError = nil;
+        NSDictionary *jsonResult = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&jsonParsingError];
+        
+        if (jsonParsingError != nil)
+        {
+            NSLog(@"Error parsing JSON.");
+        }
+        else
+        {
+            NSLog(@"Login result json: %@", jsonResult);
+            
+            
+            BOOL login = NO;
+            if([[jsonResult objectForKey:@"result"] isKindOfClass:[NSString class]])
+            {
+            }
+            else if([[jsonResult objectForKey:@"result"] isKindOfClass:[NSNumber class]])
+            {
+                if([[jsonResult objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithBool:YES]])
+                    [self login];
+            }
+            
+            if(login == YES)
+                [self login];
+        }
     }
-    
-    [self login];
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
