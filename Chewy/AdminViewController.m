@@ -11,6 +11,7 @@
 @implementation AdminViewController {
     UITextField* _messageField;
     NSString* _message;
+    UILabel* _messageSentStatus;
 }
 
 - (void)viewDidLoad
@@ -46,6 +47,15 @@
     submitButton.layer.backgroundColor = [UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1.0].CGColor;
     [submitButton addTarget:self action:@selector(send) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:submitButton];
+    
+    CGRect labelFrame = CGRectMake(xOffset, submitButton.frame.size.height + submitButton.frame.origin.y + yPadding,
+                                   labelSize.width + 50, labelSize.height);
+    
+    _messageSentStatus = [[UILabel alloc] initWithFrame:labelFrame];
+    _messageSentStatus.text = @"Message Sent Successfully";
+    _messageSentStatus.font = [UIFont systemFontOfSize:10];
+    _messageSentStatus.hidden = YES;
+    [self.view addSubview:_messageSentStatus];
 }
 
 - (void)didReceiveMemoryWarning
@@ -69,6 +79,61 @@
 {
     [_messageField resignFirstResponder];
     NSLog(@"Sending message: %@", _message);
+    
+    NSString* username = @"chewy";
+    NSString* pw = @"chewy";
+    
+    
+    NSString* fullRequest = [NSString stringWithFormat:@"http://54.186.181.133/chewy.php?action=send_push&user=%@&password=%@&message=%@",
+                             username, pw,
+                             [_message stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:fullRequest]];
+    
+    // Create url connection and fire request
+    NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    
+    _messageSentStatus.hidden = YES;
+}
+
+# pragma mark NSURLConnection
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+{
+    // A response has been received, this is where we initialize the instance var you created
+    // so that we can append data to it in the didReceiveData method
+    // Furthermore, this method is called each time there is a redirect so reinitializing it
+    // also serves to clear it
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+{
+    // Append the new data to the instance variable you declared
+    NSLog(@"Message sent");
+    _messageSentStatus.hidden = NO;
+    _messageSentStatus.text = @"Message Sent Successfully";
+}
+
+- (NSCachedURLResponse *)connection:(NSURLConnection *)connection
+                  willCacheResponse:(NSCachedURLResponse*)cachedResponse
+{
+    // Return nil to indicate not necessary to store a cached response for this connection
+    return nil;
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+    // The request is complete and data has been received
+    // You can parse the stuff in your instance variable now
+    
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+{
+    // The request has failed for some reason!
+    // Check the error var
+    _messageSentStatus.hidden = NO;
+    _messageSentStatus.text = @"Message Failed to send";
+
 }
 
 

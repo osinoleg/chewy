@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "Messages.h"
+#import "Chewy.h"
 
 @interface ChewyView : UIView
 
-- (id)initWithData:(Messages*)data frame:(CGRect)frame;
+- (id)initWithData:(Chewy*)chewy frame:(CGRect)frame;
 
 @end

@@ -80,6 +80,15 @@
 - (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
 {
 	NSLog(@"My token is: %@", deviceToken);
+    NSString *token = [[deviceToken description] stringByTrimmingCharactersInSet: [NSCharacterSet characterSetWithCharactersInString:@"<>"]];
+    token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSLog(@"content---%@", token);
+    
+    NSString* fullRequestURL = [NSString stringWithFormat:@"http://54.186.181.133/chewy.php?action=register_device&device_id=%@", token];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:fullRequestURL]];
+    
+    // Create url connection and fire request
+    [[NSURLConnection alloc] initWithRequest:request delegate:self];
 }
 
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
