@@ -36,8 +36,8 @@
         _chewy = [[UIImageView alloc] initWithImage:_chewyAnimModel.curFrame];
         _chewy.contentMode = UIViewContentModeScaleAspectFit;
         
-        const int width = 80;
-        const int height = 133;
+        const int width = frame.size.width;
+        const int height = frame.size.height;
         int x = frame.size.width * 0.5f - width * 0.5;
         int y = frame.size.height * 0.5f - height * 0.5;
         _chewy.frame = CGRectMake(x, y, width, height);

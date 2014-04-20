@@ -39,7 +39,7 @@
     int xOffset = 20;
     int topOffset = self.navigationController.navigationBar.frame.size.height + 50;
     CGSize labelSize = CGSizeMake(100, 24);
-    CGSize textFieldSize = CGSizeMake(150, 24);
+    CGSize textFieldSize = CGSizeMake(190, 30);
     
     // Username
     UILabel* messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(xOffset, topOffset, labelSize.width, labelSize.height)];
@@ -49,7 +49,7 @@
     _messageField = [[UITextField alloc] initWithFrame:
                       CGRectMake(xOffset + labelSize.width + xPadding , topOffset,
                                  textFieldSize.width, textFieldSize.height)];
-    _messageField.layer.borderWidth = 0.5f;
+    _messageField.layer.borderWidth = 1.0f;
     _messageField.delegate = self;
     [self.view addSubview:_messageField];
     

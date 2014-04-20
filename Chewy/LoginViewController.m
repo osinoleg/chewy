@@ -28,7 +28,7 @@
     int xOffset = 20;
     int topOffset = self.navigationController.navigationBar.frame.size.height + 50;
     CGSize labelSize = CGSizeMake(100, 24);
-    CGSize textFieldSize = CGSizeMake(100, 24);
+    CGSize textFieldSize = CGSizeMake(160, 24);
     
     // Username
     UILabel* userName = [[UILabel alloc] initWithFrame:CGRectMake(xOffset, topOffset, labelSize.width, labelSize.height)];

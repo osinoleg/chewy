@@ -8,8 +8,6 @@
 
 #import "Chewy.h"
 
-#define CHEWY_SCALE 0.2f
-
 @implementation Chewy {
     UIImage* _defaultFrame;
     NSArray* _spinAnim;
@@ -25,14 +23,20 @@
         _defaultFrame = [UIImage imageNamed:@"chewy1_0"];
         _curFrame = _defaultFrame;
         _curFrameIndex = 0;
-        
+
+        // Regular spin
 //        _spinAnim = @[[UIImage imageNamed:@"chewy1_0"], [UIImage imageNamed:@"chewy1_1"],
 //                      [UIImage imageNamed:@"chewy1_2"], [UIImage imageNamed:@"chewy1_3"]];
         
-        _spinAnim = @[[UIImage imageNamed:@"chewy1_0"], [UIImage imageNamed:@"chewy1_4"],
-                      [UIImage imageNamed:@"chewy1_0"]];
+//        // Spin and tickle
+//        _spinAnim = @[[UIImage imageNamed:@"chewy1_5"], [UIImage imageNamed:@"chewy1_1"],
+//                      [UIImage imageNamed:@"chewy1_4"], [UIImage imageNamed:@"chewy1_3"],
+//                      [UIImage imageNamed:@"chewy1_2"]];
 
-        
+        // Tickle
+        _spinAnim = @[[UIImage imageNamed:@"chewy1_0"], [UIImage imageNamed:@"chewy1_4"],
+                      [UIImage imageNamed:@"chewy1_5"]];
+
         return self;
     }
     

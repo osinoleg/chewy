@@ -12,6 +12,18 @@
 #import "LoginViewController.h"
 #import "AdminViewController.h"
 
+@implementation MessageCell {
+    
+}
+
+- (void)setMessageText:(NSString *)messageText
+{
+    self.textLabel.text = messageText;
+    _messageText = messageText;
+}
+
+@end
+
 @implementation MainViewController {
     ChewyView* _chewyView;
     LoginViewController* _loginController;
@@ -26,7 +38,9 @@
     {
         _chewyAnimModel = [[Chewy alloc] init];
         _messages = [[Messages alloc] init];
-//        NSMutableArray* sampleMsgs = [NSMutableArray arrayWithArray:@[@"msg 1", @"msg 2", @"msg 3"]];
+        
+//        NSMutableArray* sampleMsgs = [NSMutableArray arrayWithArray:@[@"msg 1", @"msg 2", @"msg 3",
+//                                                                      @"msg 1", @"http://google.com", @"msg 3"]];
 //        _messages.recentMessages = sampleMsgs;
         
         return self;
@@ -39,9 +53,9 @@
 {
     [super viewDidLoad];
     
-    int topOffset = 20 + self.navigationController.navigationBar.frame.size.height;
-    
-    CGRect chewyViewFrame = CGRectMake(0, topOffset, self.view.frame.size.width, 200);
+    int topOffset = 20 + self.navigationController.navigationBar.frame.size.height + 10;
+    int chewyHeight = 200 * ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? 2 : 1);
+    CGRect chewyViewFrame = CGRectMake(0, topOffset, self.view.frame.size.width, chewyHeight);
     _chewyView = [[ChewyView alloc] initWithData:_chewyAnimModel frame:chewyViewFrame];
     [self.view addSubview:_chewyView];
     
@@ -58,15 +72,15 @@
     self.navigationItem.rightBarButtonItem = admin;
     
 
-    int messageViewHeight = 200;
-    CGRect messageViweFrame = CGRectMake(0, messageViewHeight + topOffset, self.view.frame.size.width,
-                                         self.view.frame.size.height - messageViewHeight - topOffset);
+    int messageViewY = _chewyView.frame.origin.y + _chewyView.frame.size.height + 5;
+    int messageViewHeight = self.view.frame.size.height - messageViewY;
+    CGRect messageViweFrame = CGRectMake(0, messageViewY, self.view.frame.size.width, messageViewHeight);
     _messageView = [[UITableView alloc]initWithFrame:messageViweFrame style:UITableViewStylePlain];
     
     _messageView.delegate = self;
     _messageView.dataSource = self;
     
-    [_messageView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"messageCell"];
+    [_messageView registerClass:[MessageCell class] forCellReuseIdentifier:@"messageCell"];
 
     [self.view addSubview:_messageView];
     
@@ -108,15 +122,15 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellIdentifier = @"messageCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+    MessageCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     
-    if (cell == nil)
+    if(cell == nil)
     {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
+        cell = [[MessageCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
     
     // fetch message
-    cell.textLabel.text = [_messages.recentMessages objectAtIndex:indexPath.row];
+    cell.messageText = [_messages.recentMessages objectAtIndex:indexPath.row];
     cell.textLabel.font = [cell.textLabel.font fontWithSize:20];
     
     return cell;
@@ -124,7 +138,11 @@
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    NSURL* url = [_messages.messageURLs objectAtIndex:indexPath.row];
+    if(url != nil)
+    {
+        [[UIApplication sharedApplication] openURL:url];
+    }
 }
 
 # pragma mark NSNotifications

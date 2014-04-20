@@ -36,6 +36,21 @@
     NSString *alertValue = [[data valueForKey:@"aps"] valueForKey:@"alert"];
 	[_recentMessages insertObject:alertValue atIndex:0];
     
+    
+    NSURL* url = nil;
+    NSDataDetector *linkDetector = [NSDataDetector dataDetectorWithTypes:NSTextCheckingTypeLink error:nil];
+    NSArray *matches = [linkDetector matchesInString:alertValue options:0 range:NSMakeRange(0, [alertValue length])];
+    for (NSTextCheckingResult *match in matches) {
+        if ([match resultType] == NSTextCheckingTypeLink) {
+            url = [match URL];
+            NSLog(@"found URL: %@", url);
+            break;
+        }
+    }
+    [_messageURLs insertObject:url atIndex:0];
+
+    
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:@"MessagesChangedNotification" object:self];
 }
 

@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "MainViewController.h"
+#import "NavigationViewController.h"
 
 @implementation AppDelegate {
     MainViewController* _mainViewController;
@@ -18,7 +19,7 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
     _mainViewController = [[MainViewController alloc] init];
-    UINavigationController* navController = [[UINavigationController alloc] initWithRootViewController:_mainViewController];
+    UINavigationController* navController = [[NavigationViewController alloc] initWithRootViewController:_mainViewController];
     self.window.rootViewController = navController;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
@@ -75,6 +76,11 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (NSUInteger) supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskPortrait;   
 }
 
 - (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken

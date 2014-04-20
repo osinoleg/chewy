@@ -31,6 +31,7 @@
 		D28CDA9018FF94F8006C4275 /* AdminViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D28CDA8F18FF94F8006C4275 /* AdminViewController.m */; };
 		D2B840BE190362E7008063EA /* chewy1_4.png in Resources */ = {isa = PBXBuildFile; fileRef = D2B840BC190362E7008063EA /* chewy1_4.png */; };
 		D2B840BF190362E7008063EA /* chewy1_5.png in Resources */ = {isa = PBXBuildFile; fileRef = D2B840BD190362E7008063EA /* chewy1_5.png */; };
+		D2B840C21904658C008063EA /* NavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B840C11904658C008063EA /* NavigationViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +79,8 @@
 		D28CDA8F18FF94F8006C4275 /* AdminViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdminViewController.m; sourceTree = "<group>"; };
 		D2B840BC190362E7008063EA /* chewy1_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chewy1_4.png; sourceTree = "<group>"; };
 		D2B840BD190362E7008063EA /* chewy1_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chewy1_5.png; sourceTree = "<group>"; };
+		D2B840C01904658C008063EA /* NavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationViewController.h; sourceTree = "<group>"; };
+		D2B840C11904658C008063EA /* NavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -220,6 +223,8 @@
 				D28CDA8C18FF8C96006C4275 /* LoginViewController.m */,
 				D28CDA8E18FF94F8006C4275 /* AdminViewController.h */,
 				D28CDA8F18FF94F8006C4275 /* AdminViewController.m */,
+				D2B840C01904658C008063EA /* NavigationViewController.h */,
+				D2B840C11904658C008063EA /* NavigationViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -336,6 +341,7 @@
 				D28CDA8118FDE54C006C4275 /* MainViewController.m in Sources */,
 				D28CDA8418FDE743006C4275 /* Chewy.m in Sources */,
 				D28CDA5D18FDE4DC006C4275 /* main.m in Sources */,
+				D2B840C21904658C008063EA /* NavigationViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

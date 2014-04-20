@@ -11,6 +11,7 @@
 @interface Messages : NSObject
 
 @property (nonatomic) NSMutableArray* recentMessages;
+@property (nonatomic) NSMutableArray* messageURLs;
 
 - (void)parseData:(NSDictionary*)data;
 

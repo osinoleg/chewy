@@ -9,6 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "Messages.h"
 
+@interface MessageCell : UITableViewCell
+
+@property (nonatomic) NSString* messageText;
+
+@end
+
 @interface MainViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, NSURLConnectionDelegate>
 
 @property(nonatomic) Messages* messages;
