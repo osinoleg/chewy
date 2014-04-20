@@ -26,8 +26,12 @@
         _curFrame = _defaultFrame;
         _curFrameIndex = 0;
         
-        _spinAnim = @[[UIImage imageNamed:@"chewy1_0"], [UIImage imageNamed:@"chewy1_1"],
-                      [UIImage imageNamed:@"chewy1_2"], [UIImage imageNamed:@"chewy1_3"]];
+//        _spinAnim = @[[UIImage imageNamed:@"chewy1_0"], [UIImage imageNamed:@"chewy1_1"],
+//                      [UIImage imageNamed:@"chewy1_2"], [UIImage imageNamed:@"chewy1_3"]];
+        
+        _spinAnim = @[[UIImage imageNamed:@"chewy1_0"], [UIImage imageNamed:@"chewy1_4"],
+                      [UIImage imageNamed:@"chewy1_0"]];
+
         
         return self;
     }
@@ -42,7 +46,7 @@
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"ChewyAnimationBeganNotification" object:self];
     
-    _animTimer = [NSTimer scheduledTimerWithTimeInterval:0.08
+    _animTimer = [NSTimer scheduledTimerWithTimeInterval:0.1
                                      target:self
                                    selector:@selector(updateAnimation:)
                                    userInfo:nil

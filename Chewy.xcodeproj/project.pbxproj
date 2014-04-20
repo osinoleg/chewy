@@ -29,6 +29,8 @@
 		D28CDA8A18FDECDB006C4275 /* Messages.m in Sources */ = {isa = PBXBuildFile; fileRef = D28CDA8918FDECDB006C4275 /* Messages.m */; };
 		D28CDA8D18FF8C96006C4275 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D28CDA8C18FF8C96006C4275 /* LoginViewController.m */; };
 		D28CDA9018FF94F8006C4275 /* AdminViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D28CDA8F18FF94F8006C4275 /* AdminViewController.m */; };
+		D2B840BE190362E7008063EA /* chewy1_4.png in Resources */ = {isa = PBXBuildFile; fileRef = D2B840BC190362E7008063EA /* chewy1_4.png */; };
+		D2B840BF190362E7008063EA /* chewy1_5.png in Resources */ = {isa = PBXBuildFile; fileRef = D2B840BD190362E7008063EA /* chewy1_5.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +76,8 @@
 		D28CDA8C18FF8C96006C4275 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		D28CDA8E18FF94F8006C4275 /* AdminViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdminViewController.h; sourceTree = "<group>"; };
 		D28CDA8F18FF94F8006C4275 /* AdminViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdminViewController.m; sourceTree = "<group>"; };
+		D2B840BC190362E7008063EA /* chewy1_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chewy1_4.png; sourceTree = "<group>"; };
+		D2B840BD190362E7008063EA /* chewy1_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chewy1_5.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +111,8 @@
 				D27203461900D1FF00B100FF /* chewy1_1.png */,
 				D27203471900D1FF00B100FF /* chewy1_2.png */,
 				D27203481900D1FF00B100FF /* chewy1_3.png */,
+				D2B840BC190362E7008063EA /* chewy1_4.png */,
+				D2B840BD190362E7008063EA /* chewy1_5.png */,
 			);
 			path = chewy_anims;
 			sourceTree = "<group>";
@@ -300,7 +306,9 @@
 				D272034A1900D1FF00B100FF /* chewy1_1.png in Resources */,
 				D27203491900D1FF00B100FF /* chewy1_0.png in Resources */,
 				D272034B1900D1FF00B100FF /* chewy1_2.png in Resources */,
+				D2B840BF190362E7008063EA /* chewy1_5.png in Resources */,
 				D28CDA5B18FDE4DC006C4275 /* InfoPlist.strings in Resources */,
+				D2B840BE190362E7008063EA /* chewy1_4.png in Resources */,
 				D28CDA6318FDE4DC006C4275 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
