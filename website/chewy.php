@@ -12,6 +12,9 @@ function process_request($request)
         case "login":
             return login($request);
         break;
+        case "get_message_history":
+            return get_message_history($request);
+        break;
         case "get_registered_devices":
             return get_registered_devices($request);
         break;
@@ -97,6 +100,40 @@ function login($request)
     return json_encode($result);
 }
 
+function get_message_history($request)
+{
+    $link = mysql_connect("localhost");
+    if (!$link)
+        return "Unable to connect to local DB";
+
+    if (!mysql_select_db('chewy', $link))
+    {
+        mysql_close($link);
+        return "Unable to use DB chewy";
+    }
+
+    $resource = mysql_query("SELECT * FROM message_history");
+    $history = array();
+    while($row = mysql_fetch_array($resource, MYSQL_ASSOC))
+        $history[] = $row;
+
+    $result = array();
+    foreach($history as $history_row)
+    {
+        $message_id = $history_row['message_id'];
+        $resource = mysql_query("SELECT * FROM messages where id='$message_id'");
+        $msg_row = mysql_fetch_array($resource, MYSQL_ASSOC);
+        $message = $msg_row['message'];
+
+        if (isset($result[$message]))
+            $result[$message] += 1;
+        else
+            $result[$message] = 1;
+    }
+
+    return json_encode($result);
+}
+
 function send_push($request)
 {
     $user = isset($request['user']) ? $request['user'] : "";
@@ -134,9 +171,25 @@ function send_push($request)
 
     // Get devices
     $resource = mysql_query("SELECT * FROM devices;");
-    $results = array();
+    $devices = array();
     while($row = mysql_fetch_array($resource, MYSQL_ASSOC))
-        $results[] = $row;
+        $devices[] = $row;
+
+    // Add Message to message table and get the id
+    $resource = mysql_query("SELECT * from messages where message = '$message'");
+    $message = array();
+    while($row = mysql_fetch_array($resource, MYSQL_ASSOC))
+        $message[] = $row;
+
+    if (!$message)
+    {
+        mysql_query("INSERT into messages (message) VALUES('$message');", $link);
+        $message = array();
+        while($row = mysql_fetch_array($resource, MYSQL_ASSOC))
+            $message[] = $row;
+    }
+
+    $message_id = $message[0]['id'];
 
     // Send the push!
     $ctx = stream_context_create();
@@ -156,7 +209,7 @@ function send_push($request)
     $payload = json_encode($body);
 
     $errors = array();
-    foreach($results as $device_row)
+    foreach($devices as $device_row)
     {
         try
         {
@@ -171,6 +224,8 @@ function send_push($request)
         $sent = fwrite($fp, $msg, strlen($msg));
         if (!$sent)
             $errors[] = "Failed to send push to device_id: $device_row[device_id]";
+        else
+            mysql_query("INSERT into message_history (device_id, message_id) VALUES('$device_row[device_id]', '$message_id');", $link);
     }
 
     fclose($fp);
