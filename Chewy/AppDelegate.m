@@ -17,7 +17,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-
+    
+    _messages = [[Messages alloc] init];
+    
     _mainViewController = [[MainViewController alloc] init];
     UINavigationController* navController = [[NavigationViewController alloc] initWithRootViewController:_mainViewController];
     self.window.rootViewController = navController;
@@ -60,7 +62,8 @@
 
 - (void)addMessageFromRemoteNotification:(NSDictionary*)userInfo
 {
-    [_mainViewController.messages parseData:userInfo];
+    // TODO: repalce this with a call to the server and get the full msg list.
+    [_messages parsePushData:userInfo];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application

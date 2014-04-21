@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AdminViewController : UIViewController <UITextFieldDelegate>
+@interface AdminViewController : UIViewController <UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate>
 
 - (id)initWithUseInfo:(NSString*)username password:(NSString*)password;
 

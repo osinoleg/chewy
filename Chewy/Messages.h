@@ -13,6 +13,7 @@
 @property (nonatomic) NSMutableArray* recentMessages;
 @property (nonatomic) NSMutableArray* messageURLs;
 
-- (void)parseData:(NSDictionary*)data;
+- (void)parsePushData:(NSDictionary*)data;
+- (void)parseServerData:(NSDictionary*)data;
 
 @end

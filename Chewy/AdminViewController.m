@@ -7,6 +7,7 @@
 //
 
 #import "AdminViewController.h"
+#import "AppDelegate.h"
 
 @implementation AdminViewController {
     UITextField* _messageField;
@@ -14,6 +15,7 @@
     UILabel* _messageSentStatus;
     NSString* _username;
     NSString* _password;
+    UITableView* _messageView;
 }
 
 - (id)initWithUseInfo:(NSString*)username password:(NSString*)password
@@ -70,12 +72,67 @@
     _messageSentStatus.font = [UIFont systemFontOfSize:10];
     _messageSentStatus.hidden = YES;
     [self.view addSubview:_messageSentStatus];
+    
+    // Populate message stats
+    int messageViewY = _messageSentStatus.frame.origin.y + _messageSentStatus.frame.size.height + 5;
+    int messageViewHeight = self.view.frame.size.height - messageViewY;
+    CGRect messageViweFrame = CGRectMake(0, messageViewY, self.view.frame.size.width, messageViewHeight);
+
+    _messageView = [[UITableView alloc]initWithFrame:messageViweFrame style:UITableViewStylePlain];
+    
+    _messageView.delegate = self;
+    _messageView.dataSource = self;
+    
+    [_messageView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"messageCell"];
+    
+    [self.view addSubview:_messageView];
+
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+# pragma mark tableview
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [appDelegate.messages.recentMessages count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *cellIdentifier = @"messageCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+    
+    if(cell == nil)
+    {
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    }
+    
+    // fetch message
+    cell.textLabel.text = [appDelegate.messages.recentMessages objectAtIndex:indexPath.row];
+    cell.textLabel.font = [cell.textLabel.font fontWithSize:20];
+    
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+
+}
+
+# pragma mark NSNotifications
+
+- (void)receiveMessages:(NSNotification *)notification
+{
+    if([[notification name] isEqualToString:@"MessagesChangedNotification"])
+    {
+        NSLog (@"Got new messages to display");
+        [_messageView reloadData];
+    }
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField

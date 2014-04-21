@@ -7,9 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Messages.h"
+
+#define appDelegate ((AppDelegate *)[[UIApplication sharedApplication] delegate])
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
-@property (strong, nonatomic) UIWindow *window;
+@property(strong, nonatomic) UIWindow *window;
+@property(nonatomic) Messages* messages;
 
 @end

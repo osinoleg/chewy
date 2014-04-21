@@ -11,6 +11,7 @@
 #import "Messages.h"
 #import "LoginViewController.h"
 #import "AdminViewController.h"
+#import "AppDelegate.h"
 
 @implementation MessageCell {
     
@@ -37,8 +38,6 @@
     if(self = [super init])
     {
         _chewyAnimModel = [[Chewy alloc] init];
-        _messages = [[Messages alloc] init];
-        
 //        NSMutableArray* sampleMsgs = [NSMutableArray arrayWithArray:@[@"msg 1", @"msg 2", @"msg 3",
 //                                                                      @"msg 1", @"http://google.com", @"msg 3"]];
 //        _messages.recentMessages = sampleMsgs;
@@ -116,7 +115,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [_messages.recentMessages count];
+    return [appDelegate.messages.recentMessages count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -130,17 +129,17 @@
     }
     
     // fetch message
-    cell.messageText = [_messages.recentMessages objectAtIndex:indexPath.row];
+    cell.messageText = [appDelegate.messages.recentMessages objectAtIndex:indexPath.row];
     cell.textLabel.font = [cell.textLabel.font fontWithSize:20];
     
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSURL* url = [_messages.messageURLs objectAtIndex:indexPath.row];
-    if(url != nil)
+    if([[appDelegate.messages.messageURLs objectAtIndex:indexPath.row] isKindOfClass:[NSURL class]])
     {
+        NSURL* url = [appDelegate.messages.messageURLs objectAtIndex:indexPath.row];
         [[UIApplication sharedApplication] openURL:url];
     }
 }
@@ -190,7 +189,7 @@
     // Append the new data to the instance variable you declared
     //NSString *alertValue = [[data valueForKey:@"aps"] valueForKey:@"alert"];
     //NSDictionary* temp = [NSDictionary dictionaryWithObjectsAndKeys:@", nil]
-    //[_messages parseData:data];
+    //[_messages parsePushData:data];
 }
 
 - (NSCachedURLResponse *)connection:(NSURLConnection *)connection
