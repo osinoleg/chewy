@@ -38,9 +38,24 @@
 		}
 	}
     
+    
+    // Request all messages from server
+    NSString* fullRequestURL = [NSString stringWithFormat:@"http://54.186.181.133/chewy.php?action=get_message_history"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:fullRequestURL]];
+    
+    // Create url connection and fire request
+    [[NSURLConnection alloc] initWithRequest:request delegate:self];
+
     return YES;
 }
 
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+{
+    NSError *jsonParsingError = nil;
+    NSDictionary *jsonResult = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&jsonParsingError];
+    if(jsonParsingError == nil)
+        [_messages parseServerData:jsonResult];
+}
 
 - (void)application:(UIApplication*)application didReceiveRemoteNotification:(NSDictionary*)userInfo
 {
@@ -97,7 +112,7 @@
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:fullRequestURL]];
     
     // Create url connection and fire request
-    [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    [[NSURLConnection alloc] initWithRequest:request delegate:nil];
 }
 
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error

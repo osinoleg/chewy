@@ -113,7 +113,9 @@
     }
     
     // fetch message
-    cell.textLabel.text = [appDelegate.messages.recentMessages objectAtIndex:indexPath.row];
+    Message* msg = [appDelegate.messages.recentMessages objectAtIndex:indexPath.row];
+    NSString* cellTxt = [NSString stringWithFormat:@"%i / %@", [msg.count intValue],  msg.txt];
+    cell.textLabel.text = cellTxt;
     cell.textLabel.font = [cell.textLabel.font fontWithSize:20];
     
     return cell;
@@ -167,10 +169,7 @@
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
-    // A response has been received, this is where we initialize the instance var you created
-    // so that we can append data to it in the didReceiveData method
-    // Furthermore, this method is called each time there is a redirect so reinitializing it
-    // also serves to clear it
+
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
@@ -199,7 +198,6 @@
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
     // The request has failed for some reason!
-    // Check the error var
     _messageSentStatus.hidden = NO;
     _messageSentStatus.text = @"Message Failed to send";
 
