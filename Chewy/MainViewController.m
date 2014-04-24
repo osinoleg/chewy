@@ -129,7 +129,8 @@
     }
     
     // fetch message
-    cell.messageText = [appDelegate.messages.recentMessages objectAtIndex:indexPath.row];
+    Message* msg = [appDelegate.messages.recentMessages objectAtIndex:indexPath.row];
+    cell.messageText = msg.txt;
     cell.textLabel.font = [cell.textLabel.font fontWithSize:20];
     
     return cell;
@@ -137,10 +138,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if([[appDelegate.messages.messageURLs objectAtIndex:indexPath.row] isKindOfClass:[NSURL class]])
+    Message* msg = [appDelegate.messages.recentMessages objectAtIndex:indexPath.row];
+
+    if(msg.url)
     {
-        NSURL* url = [appDelegate.messages.messageURLs objectAtIndex:indexPath.row];
-        [[UIApplication sharedApplication] openURL:url];
+        [[UIApplication sharedApplication] openURL:msg.url];
     }
 }
 

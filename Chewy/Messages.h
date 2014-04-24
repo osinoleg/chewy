@@ -8,10 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
+@interface Message : NSObject
+
+@property (nonatomic) NSString* txt;
+@property (nonatomic) NSURL* url;
+@property (nonatomic) NSNumber* count;
+
+@end
+
 @interface Messages : NSObject
 
 @property (nonatomic) NSMutableArray* recentMessages;
-@property (nonatomic) NSMutableArray* messageURLs;
 
 - (void)parsePushData:(NSDictionary*)data;
 - (void)parseServerData:(NSDictionary*)data;

@@ -8,13 +8,17 @@
 
 #import "Messages.h"
 
+@implementation Message
+
+
+@end
+
 @implementation Messages
 
 - (id)init
 {
     if(self = [super init])
     {
-        _messageURLs = [[NSMutableArray alloc] init];
         _recentMessages = [[NSMutableArray alloc] init];
         return self;
     }
@@ -35,40 +39,32 @@
      */
     
     NSString *alertValue = [[data valueForKey:@"aps"] valueForKey:@"alert"];
-	[_recentMessages insertObject:alertValue atIndex:0];
-    
-    
     NSURL* url = [self extractURL:alertValue];
-    if(url == nil)
-        [_messageURLs insertObject:@"" atIndex:0]; // hack
-    else
-        [_messageURLs insertObject:url atIndex:0];
+    Message* messsage = [[Message alloc] init];
+    messsage.txt = alertValue;
+    messsage.url = url;
+    
+    [_recentMessages insertObject:alertValue atIndex:0];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"MessagesChangedNotification" object:self];
 }
 
 - (void)parseServerData:(NSDictionary*)data
 {
-    /* sample json data */
-    /*
-     {
-     "aps":
-     {
-     "alert": "SENDER_NAME: MESSAGE_TEXT",
-     },
-     }
-     */
+    NSLog(@"Message history result json: %@", data);
     
-    
-    NSString *alertValue = [[data valueForKey:@"aps"] valueForKey:@"alert"];
-	[_recentMessages insertObject:alertValue atIndex:0];
-    
-    
-    NSURL* url = [self extractURL:alertValue];
-    if(url == nil)
-        [_messageURLs insertObject:@"" atIndex:0]; // hack
-    else
-        [_messageURLs insertObject:url atIndex:0];
+    for(NSString* msgTxt in data)
+    {
+        NSNumber* count = [data objectForKey:msgTxt];
+        
+        Message* messsage = [[Message alloc] init];
+        NSURL* url = [self extractURL:msgTxt];
+        messsage.txt = msgTxt;
+        messsage.url = url;
+        messsage.count = count;
+        
+        [_recentMessages insertObject:messsage atIndex:0];
+    }
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"MessagesChangedNotification" object:self];
 }
