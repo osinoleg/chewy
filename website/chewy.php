@@ -12,6 +12,9 @@ function process_request($request)
         case "login":
             return login($request);
         break;
+        case "recieved_message":
+            return recieved_message($request);
+        break;
         case "get_message_history":
             return get_message_history($request);
         break;
@@ -112,25 +115,55 @@ function get_message_history($request)
         return "Unable to use DB chewy";
     }
 
-    $resource = mysql_query("SELECT * FROM message_history");
-    $history = array();
+    $resource = mysql_query("SELECT * FROM messages");
+    $messages = array();
     while($row = mysql_fetch_array($resource, MYSQL_ASSOC))
-        $history[] = $row;
+        $messages[] = $row;
 
     $result = array();
-    foreach($history as $history_row)
+    foreach($messages as $message)
     {
-        $message_id = $history_row['message_id'];
-        $resource = mysql_query("SELECT * FROM messages where id='$message_id'");
-        $msg_row = mysql_fetch_array($resource, MYSQL_ASSOC);
-        $message = $msg_row['message'];
+        $message_id = $message['id'];
 
-        if (isset($result[$message]))
-            $result[$message] += 1;
-        else
-            $result[$message] = 1;
+        if (!isset($result[$message_id]))
+            $result[$message_id] = array(
+                $message['message'], $message['sent_to'], 0);
     }
 
+    // Lookup who all recieved a message and fill in the results
+    $resource = mysql_query("SELECT * FROM message_history");
+    $message_history = array();
+    while($row = mysql_fetch_array($resource, MYSQL_ASSOC))
+    {
+        $message_id = $row['message_id'];
+        $result[$message_id][2] += 1;
+    }
+
+    return json_encode($result);
+}
+
+function recieved_message($request)
+{
+    $message_id = isset($request['message_id']) ? $request['message_id'] : "";
+    $device_id = isset($request['device_id']) ? $request['device_id'] : "";
+
+    if (!$device_id)
+        return "Specify a device id!";
+
+    if (!$message_id)
+        return "Specify a message id!";
+
+    $link = mysql_connect("localhost");
+    if (!$link)
+        return "Unable to connect to local DB";
+
+    if (!mysql_select_db('chewy', $link))
+    {
+        mysql_close($link);
+        return "Unable to use DB chewy";
+    }
+
+    $result = mysql_query("INSERT INTO message_history (device_id, message_id) values('$device_id', '$message_id')");
     return json_encode($result);
 }
 
@@ -176,20 +209,13 @@ function send_push($request)
         $devices[] = $row;
 
     // Add Message to message table and get the id
-    $resource = mysql_query("SELECT * from messages where message = '$message'");
-    $message = array();
+    mysql_query("INSERT into messages (message) VALUES('$message');", $link);
+    $resource = mysql_query("SELECT * from messages where message='$message' order by id desc limit 1;", $link);
+    $message_result = array();
     while($row = mysql_fetch_array($resource, MYSQL_ASSOC))
-        $message[] = $row;
+        $message_result[] = $row;
 
-    if (!$message)
-    {
-        mysql_query("INSERT into messages (message) VALUES('$message');", $link);
-        $message = array();
-        while($row = mysql_fetch_array($resource, MYSQL_ASSOC))
-            $message[] = $row;
-    }
-
-    $message_id = $message[0]['id'];
+    $message_id = $message_result[0]['id'];
 
     // Send the push!
     $ctx = stream_context_create();
@@ -201,14 +227,18 @@ function send_push($request)
     if (!$fp)
         return "Failed to connect: $eer $errstr";
 
+    $soundfile = "pushnote.wav";
     $body = array();
     $body['aps'] = array(
-        'alert' => $message
+        'alert' => $message,
+        'sound' => $soundfile,
+        'message_id' => $message_id,
     );
 
     $payload = json_encode($body);
 
     $errors = array();
+    $count = 0;
     foreach($devices as $device_row)
     {
         try
@@ -225,8 +255,10 @@ function send_push($request)
         if (!$sent)
             $errors[] = "Failed to send push to device_id: $device_row[device_id]";
         else
-            mysql_query("INSERT into message_history (device_id, message_id) VALUES('$device_row[device_id]', '$message_id');", $link);
+            $count++;
     }
+
+    mysql_query("UPDATE messages set sent_to = '$count' where id = '$message_id'");
 
     fclose($fp);
     
