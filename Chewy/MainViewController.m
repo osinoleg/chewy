@@ -13,6 +13,8 @@
 #import "AdminViewController.h"
 #import "AppDelegate.h"
 
+#import <AVFoundation/AVFoundation.h>
+
 @implementation MessageCell {
     
 }
@@ -31,6 +33,7 @@
     UITableView* _messageView;
     NSMutableData* _responseData;
     Chewy* _chewyAnimModel;
+    AVAudioPlayer* _audioPlayer;
 }
 
 - (id)init
@@ -42,6 +45,12 @@
 //                                                                      @"msg 1", @"http://google.com", @"msg 3"]];
 //        _messages.recentMessages = sampleMsgs;
         
+        
+        NSError *error;
+        NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Laugh_02.wav", [[NSBundle mainBundle] resourcePath]]];
+        _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+        _audioPlayer.numberOfLoops = 0;
+
         return self;
     }
 
@@ -131,7 +140,7 @@
     // fetch message
     Message* msg = [appDelegate.messages.recentMessages objectAtIndex:indexPath.row];
     cell.messageText = msg.txt;
-    cell.textLabel.font = [cell.textLabel.font fontWithSize:20];
+    cell.textLabel.font = [cell.textLabel.font fontWithSize:14];
     
     return cell;
 }
@@ -168,6 +177,10 @@
     if(touchedView == _chewyView)
     {
         [_chewyAnimModel playAnim:CHEWY_SPIN_ANIM];
+        
+        if(_audioPlayer != nil)
+            [_audioPlayer play];
+
     }
 }
 

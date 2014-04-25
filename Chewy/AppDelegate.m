@@ -10,8 +10,12 @@
 #import "MainViewController.h"
 #import "NavigationViewController.h"
 
+#import <AVFoundation/AVFoundation.h>
+
 @implementation AppDelegate {
     MainViewController* _mainViewController;
+    NSString* _deviceToken;
+    AVAudioPlayer* _audioPlayer;
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -26,7 +30,7 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
-    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert];
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound];
     
     if(launchOptions != nil)
 	{
@@ -46,6 +50,13 @@
     // Create url connection and fire request
     [[NSURLConnection alloc] initWithRequest:request delegate:self];
 
+    
+    NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/pushnote.wav", [[NSBundle mainBundle] resourcePath]]];
+	NSError *error;
+	_audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+	_audioPlayer.numberOfLoops = 0;
+
+    
     return YES;
 }
 
@@ -77,8 +88,16 @@
 
 - (void)addMessageFromRemoteNotification:(NSDictionary*)userInfo
 {
-    // TODO: repalce this with a call to the server and get the full msg list.
-    [_messages parsePushData:userInfo];
+    NSInteger msgId = [_messages parsePushData:userInfo];
+    
+    // Tell the server that we actually got this msg (for analytics)
+    //action=recieved_message&device_id=WHATEVER&message_id=3
+    NSString* fullRequestURL = [NSString stringWithFormat:@"http://54.186.181.133/chewy.php?action=recieved_message&device_id=%@&message_id=%i",
+                                _deviceToken, msgId];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:fullRequestURL]];
+    
+    // Create url connection and fire request
+    [[NSURLConnection alloc] initWithRequest:request delegate:nil];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -113,6 +132,8 @@
     
     // Create url connection and fire request
     [[NSURLConnection alloc] initWithRequest:request delegate:nil];
+    
+    _deviceToken = token;
 }
 
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error

@@ -30,6 +30,9 @@ function process_request($request)
         case "register_device":
             return register_device($request);
         break;
+        case "get_all_messages":
+            return get_all_messages($request);
+        break;
     };
 
     return "";
@@ -99,6 +102,35 @@ function login($request)
         $result['result'] = true;
 
     mysql_close($link);
+
+    return json_encode($result);
+}
+
+function get_all_messages($request)
+{
+    $link = mysql_connect("localhost");
+    if (!$link)
+        return "Unable to connect to local DB";
+
+    if (!mysql_select_db('chewy', $link))
+    {
+        mysql_close($link);
+        return "Unable to use DB chewy";
+    }
+
+    $resource = mysql_query("SELECT * FROM messages");
+    $messages = array();
+    while($row = mysql_fetch_array($resource, MYSQL_ASSOC))
+        $messages[] = $row;
+
+    $result = array();
+    foreach($messages as $message)
+    {
+        $message_id = $message['id'];
+        $message_txt = $message['message'];
+    
+        $result[$message_id] = array($message_id, $message_txt);
+    }
 
     return json_encode($result);
 }

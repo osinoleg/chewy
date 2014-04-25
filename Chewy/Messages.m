@@ -26,47 +26,55 @@
     return self;
 }
 
-- (void)parsePushData:(NSDictionary*)data
+- (NSInteger)parsePushData:(NSDictionary*)data
 {
-    /* sample json data */
-    /*
-     {
-     "aps":
-     {
-     "alert": "SENDER_NAME: MESSAGE_TEXT",
-     },
-     }
-     */
-    
     NSString *alertValue = [[data valueForKey:@"aps"] valueForKey:@"alert"];
+    NSInteger msgId = [[[data valueForKey:@"aps"] valueForKey:@"message_id"] integerValue];
     NSURL* url = [self extractURL:alertValue];
     Message* messsage = [[Message alloc] init];
     messsage.txt = alertValue;
     messsage.url = url;
+    messsage.msgId = msgId;
     
-    [_recentMessages insertObject:alertValue atIndex:0];
-    
+    [self insertMessage:messsage];
+        
     [[NSNotificationCenter defaultCenter] postNotificationName:@"MessagesChangedNotification" object:self];
+    
+    return msgId;
 }
+
 
 - (void)parseServerData:(NSDictionary*)data
 {
     NSLog(@"Message history result json: %@", data);
     
-    for(NSString* msgTxt in data)
+    for(NSString* msgID in data)
     {
-        NSNumber* count = [data objectForKey:msgTxt];
-        
+        NSArray* msgData = [data objectForKey:msgID];
+        NSString* msgTxt = [msgData objectAtIndex:0];
         Message* messsage = [[Message alloc] init];
         NSURL* url = [self extractURL:msgTxt];
         messsage.txt = msgTxt;
         messsage.url = url;
-        messsage.count = count;
+        messsage.sent = [msgData objectAtIndex:1];
+        messsage.received = [msgData objectAtIndex:2];
+        messsage.msgId = [msgTxt integerValue];
         
-        [_recentMessages insertObject:messsage atIndex:0];
+        [self insertMessage:messsage];
     }
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"MessagesChangedNotification" object:self];
+}
+
+- (void)insertMessage:(Message*)msgToInsert
+{
+    for(Message* msg in _recentMessages)
+    {
+        if(msg.msgId == msgToInsert.msgId)
+            return;
+    }
+    
+    [_recentMessages insertObject:msgToInsert atIndex:0];
 }
 
 - (NSURL*)extractURL:(NSString*)message

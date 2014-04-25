@@ -12,7 +12,9 @@
 
 @property (nonatomic) NSString* txt;
 @property (nonatomic) NSURL* url;
-@property (nonatomic) NSNumber* count;
+@property (nonatomic) NSNumber* sent;
+@property (nonatomic) NSNumber* received;
+@property (nonatomic) NSInteger msgId;
 
 @end
 
@@ -20,7 +22,7 @@
 
 @property (nonatomic) NSMutableArray* recentMessages;
 
-- (void)parsePushData:(NSDictionary*)data;
+- (NSInteger)parsePushData:(NSDictionary*)data;
 - (void)parseServerData:(NSDictionary*)data;
 
 @end

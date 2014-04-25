@@ -32,6 +32,8 @@
 		D2B840BE190362E7008063EA /* chewy1_4.png in Resources */ = {isa = PBXBuildFile; fileRef = D2B840BC190362E7008063EA /* chewy1_4.png */; };
 		D2B840BF190362E7008063EA /* chewy1_5.png in Resources */ = {isa = PBXBuildFile; fileRef = D2B840BD190362E7008063EA /* chewy1_5.png */; };
 		D2B840C21904658C008063EA /* NavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B840C11904658C008063EA /* NavigationViewController.m */; };
+		D2FF84B41908C3B2003296BC /* Laugh_02.wav in Resources */ = {isa = PBXBuildFile; fileRef = D2FF84B31908C3B2003296BC /* Laugh_02.wav */; };
+		D2FF84B61908C4A4003296BC /* pushnote.wav in Resources */ = {isa = PBXBuildFile; fileRef = D2FF84B51908C4A4003296BC /* pushnote.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +83,8 @@
 		D2B840BD190362E7008063EA /* chewy1_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chewy1_5.png; sourceTree = "<group>"; };
 		D2B840C01904658C008063EA /* NavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationViewController.h; sourceTree = "<group>"; };
 		D2B840C11904658C008063EA /* NavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationViewController.m; sourceTree = "<group>"; };
+		D2FF84B31908C3B2003296BC /* Laugh_02.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Laugh_02.wav; sourceTree = "<group>"; };
+		D2FF84B51908C4A4003296BC /* pushnote.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = pushnote.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +171,8 @@
 		D28CDA5718FDE4DC006C4275 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D2FF84B51908C4A4003296BC /* pushnote.wav */,
+				D2FF84B31908C3B2003296BC /* Laugh_02.wav */,
 				D27203441900D1FF00B100FF /* chewy_anims */,
 				D28CDA5818FDE4DC006C4275 /* Chewy-Info.plist */,
 				D28CDA5918FDE4DC006C4275 /* InfoPlist.strings */,
@@ -309,10 +315,12 @@
 			files = (
 				D272034C1900D1FF00B100FF /* chewy1_3.png in Resources */,
 				D272034A1900D1FF00B100FF /* chewy1_1.png in Resources */,
+				D2FF84B61908C4A4003296BC /* pushnote.wav in Resources */,
 				D27203491900D1FF00B100FF /* chewy1_0.png in Resources */,
 				D272034B1900D1FF00B100FF /* chewy1_2.png in Resources */,
 				D2B840BF190362E7008063EA /* chewy1_5.png in Resources */,
 				D28CDA5B18FDE4DC006C4275 /* InfoPlist.strings in Resources */,
+				D2FF84B41908C3B2003296BC /* Laugh_02.wav in Resources */,
 				D2B840BE190362E7008063EA /* chewy1_4.png in Resources */,
 				D28CDA6318FDE4DC006C4275 /* Images.xcassets in Resources */,
 			);

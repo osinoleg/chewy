@@ -114,9 +114,9 @@
     
     // fetch message
     Message* msg = [appDelegate.messages.recentMessages objectAtIndex:indexPath.row];
-    NSString* cellTxt = [NSString stringWithFormat:@"%i / %@", [msg.count intValue],  msg.txt];
+    NSString* cellTxt = [NSString stringWithFormat:@"%i/%i %@", [msg.sent intValue], [msg.received intValue],  msg.txt];
     cell.textLabel.text = cellTxt;
-    cell.textLabel.font = [cell.textLabel.font fontWithSize:20];
+    cell.textLabel.font = [cell.textLabel.font fontWithSize:14];
     
     return cell;
 }
