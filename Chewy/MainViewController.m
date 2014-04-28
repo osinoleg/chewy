@@ -96,6 +96,8 @@
                                              selector:@selector(receiveMessages:)
                                                  name:@"MessagesChangedNotification"
                                                object:nil];
+    
+    [appDelegate fetchAllMessages];
 }
 
 - (void)didReceiveMemoryWarning

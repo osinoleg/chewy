@@ -16,6 +16,8 @@
     NSString* _username;
     NSString* _password;
     UITableView* _messageView;
+    NSURLConnection* _requestMsgHistory;
+    Messages* _messageHistory;
 }
 
 - (id)initWithUseInfo:(NSString*)username password:(NSString*)password
@@ -24,6 +26,13 @@
     {
         _password = password;
         _username = username;
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(receiveMessages:)
+                                                     name:@"MessagesChangedNotification"
+                                                   object:nil];
+
+        
         return self;
     }
     
@@ -34,6 +43,8 @@
 {
     [super viewDidLoad];
 
+    _messageHistory = [[Messages alloc] init];
+    
     self.navigationItem.title = @"Admin";
     
     int xPadding = 5;
@@ -86,7 +97,13 @@
     [_messageView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"messageCell"];
     
     [self.view addSubview:_messageView];
+    
+    // Request all messages from server
+    NSString* fullRequestURL = [NSString stringWithFormat:@"http://54.186.181.133/chewy.php?action=get_message_history"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:fullRequestURL]];
 
+    // Create url connection and fire request
+    _requestMsgHistory = [[NSURLConnection alloc] initWithRequest:request delegate:self];
 }
 
 - (void)didReceiveMemoryWarning
@@ -99,7 +116,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [appDelegate.messages.recentMessages count];
+    return [_messageHistory.recentMessages count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -113,7 +130,7 @@
     }
     
     // fetch message
-    Message* msg = [appDelegate.messages.recentMessages objectAtIndex:indexPath.row];
+    Message* msg = [_messageHistory.recentMessages objectAtIndex:indexPath.row];
     NSString* cellTxt = [NSString stringWithFormat:@"%i/%i %@", [msg.sent intValue], [msg.received intValue],  msg.txt];
     cell.textLabel.text = cellTxt;
     cell.textLabel.font = [cell.textLabel.font fontWithSize:14];
@@ -174,11 +191,20 @@
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
-    // Append the new data to the instance variable you declared
-    NSLog(@"Message sent");
-    _messageField.text = @"";
-    _messageSentStatus.hidden = NO;
-    _messageSentStatus.text = @"Message Sent Successfully";
+    if(_requestMsgHistory == connection)
+    {
+        NSError *jsonParsingError = nil;
+        NSDictionary *jsonResult = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&jsonParsingError];
+        if(jsonParsingError == nil)
+            [_messageHistory parseServerData:jsonResult];
+    }
+    else
+    {
+        NSLog(@"Message sent");
+        _messageField.text = @"";
+        _messageSentStatus.hidden = NO;
+        _messageSentStatus.text = @"Message Sent Successfully";
+    }
 }
 
 - (NSCachedURLResponse *)connection:(NSURLConnection *)connection

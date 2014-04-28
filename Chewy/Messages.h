@@ -24,5 +24,6 @@
 
 - (NSInteger)parsePushData:(NSDictionary*)data;
 - (void)parseServerData:(NSDictionary*)data;
+- (void)parseAllMessages:(NSDictionary*)data;
 
 @end

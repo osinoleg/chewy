@@ -42,15 +42,6 @@
 		}
 	}
     
-    
-    // Request all messages from server
-    NSString* fullRequestURL = [NSString stringWithFormat:@"http://54.186.181.133/chewy.php?action=get_message_history"];
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:fullRequestURL]];
-    
-    // Create url connection and fire request
-    [[NSURLConnection alloc] initWithRequest:request delegate:self];
-
-    
     NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/pushnote.wav", [[NSBundle mainBundle] resourcePath]]];
 	NSError *error;
 	_audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
@@ -65,7 +56,7 @@
     NSError *jsonParsingError = nil;
     NSDictionary *jsonResult = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&jsonParsingError];
     if(jsonParsingError == nil)
-        [_messages parseServerData:jsonResult];
+        [_messages parseAllMessages:jsonResult];
 }
 
 - (void)application:(UIApplication*)application didReceiveRemoteNotification:(NSDictionary*)userInfo
@@ -139,6 +130,16 @@
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
 {
 	NSLog(@"Failed to get token, error: %@", error);
+}
+
+- (void)fetchAllMessages
+{
+    // Request all messages from server
+    NSString* fullRequestURL = [NSString stringWithFormat:@"http://54.186.181.133/chewy.php?action=get_all_messages"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:fullRequestURL]];
+    
+    // Create url connection and fire request
+    [[NSURLConnection alloc] initWithRequest:request delegate:self];
 }
 
 @end

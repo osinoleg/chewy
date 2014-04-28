@@ -43,10 +43,29 @@
     return msgId;
 }
 
+- (void)parseAllMessages:(NSDictionary*)data
+{
+    NSLog(@"Message history result json: %@", data);
+    
+    for(NSString* msgID in data)
+    {
+        NSArray* msgData = [data objectForKey:msgID];
+        NSString* msgTxt = [msgData objectAtIndex:1];
+        Message* messsage = [[Message alloc] init];
+        NSURL* url = [self extractURL:msgTxt];
+        messsage.txt = msgTxt;
+        messsage.url = url;
+        messsage.msgId = [msgID integerValue];
+        
+        [self insertMessage:messsage];
+    }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"MessagesChangedNotification" object:self];
+}
 
 - (void)parseServerData:(NSDictionary*)data
 {
-    NSLog(@"Message history result json: %@", data);
+    NSLog(@"Message received history result json: %@", data);
     
     for(NSString* msgID in data)
     {
@@ -58,7 +77,7 @@
         messsage.url = url;
         messsage.sent = [msgData objectAtIndex:1];
         messsage.received = [msgData objectAtIndex:2];
-        messsage.msgId = [msgTxt integerValue];
+        messsage.msgId = [msgID integerValue];
         
         [self insertMessage:messsage];
     }
