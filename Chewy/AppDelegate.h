@@ -16,6 +16,10 @@
 @property(strong, nonatomic) UIWindow *window;
 @property(nonatomic) Messages* messages;
 
+// Note: obviously move this into it's own model if this prototype evolves.
+@property(nonatomic) NSString* username;
+@property(nonatomic) NSString* password;
+
 - (void)fetchAllMessages;
 
 @end

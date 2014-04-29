@@ -113,7 +113,7 @@
     
     if(_loginController.loggedIn)
     {
-        AdminViewController* controller = [[AdminViewController alloc] init];
+        AdminViewController* controller = [[AdminViewController alloc] initWithUseInfo:appDelegate.username password:appDelegate.password];
         [self.navigationController pushViewController:controller animated:NO];
     }
     else

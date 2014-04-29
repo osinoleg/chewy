@@ -8,6 +8,7 @@
 
 #import "LoginViewController.h"
 #import "AdminViewController.h"
+#import "AppDelegate.h"
 
 @implementation LoginViewController {
     UITextField* _passwordField;
@@ -136,9 +137,15 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     if(textField == _userNameField)
+    {
         _username = textField.text;
+        appDelegate.username = _username;
+    }
     else if(textField == _passwordField)
+    {
         _password = textField.text;
+        appDelegate.password = _password;
+    }
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField

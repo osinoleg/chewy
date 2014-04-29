@@ -10,6 +10,9 @@
 
 @implementation Message
 
+- (NSComparisonResult)compare:(Message*)otherObject {
+    return [[NSNumber numberWithInteger:self.msgId] compare:[NSNumber numberWithInteger:otherObject.msgId]];
+}
 
 @end
 
@@ -37,7 +40,9 @@
     messsage.msgId = msgId;
     
     [self insertMessage:messsage];
-        
+
+    [self sortMessages];
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:@"MessagesChangedNotification" object:self];
     
     return msgId;
@@ -60,6 +65,8 @@
         [self insertMessage:messsage];
     }
     
+    [self sortMessages];
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:@"MessagesChangedNotification" object:self];
 }
 
@@ -81,6 +88,8 @@
         
         [self insertMessage:messsage];
     }
+    
+    [self sortMessages];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"MessagesChangedNotification" object:self];
 }
@@ -109,6 +118,18 @@
         }
     }
     return url;
+}
+
+- (void)sortMessages
+{
+    NSSortDescriptor *sortDescriptor;
+    sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"msgId"
+                                                 ascending:NO];
+    NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+    NSArray *sortedArray;
+    sortedArray = [_recentMessages sortedArrayUsingDescriptors:sortDescriptors];
+        
+    _recentMessages = [NSMutableArray arrayWithArray:sortedArray];
 }
 
 @end
