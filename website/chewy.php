@@ -253,7 +253,7 @@ function send_push($request)
     $ctx = stream_context_create();
     stream_context_set_option($ctx, 'ssl', 'local_cert', 'final.pem');
     stream_context_set_option($ctx, 'ssl', 'passphrase', '?oleg?');
-    $fp = stream_socket_client('ssl://gateway.sandbox.push.apple.com:2195', $err,
+    $fp = stream_socket_client('ssl://gateway.push.apple.com:2195', $err,
         $errstr, 60, STREAM_CLIENT_CONNECT | STREAM_CLIENT_PERSISTENT, $ctx);
 
     if (!$fp)
