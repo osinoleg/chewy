@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:Chewy.xcodeproj">
+      location = "self:WhamSlam.xcodeproj">
    </FileRef>
 </Workspace>
