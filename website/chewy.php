@@ -257,7 +257,10 @@ function send_push($request)
         $errstr, 60, STREAM_CLIENT_CONNECT | STREAM_CLIENT_PERSISTENT, $ctx);
 
     if (!$fp)
-        return "Failed to connect: $eer $errstr";
+    {
+        error_log("Failed to connect: ". $eer . $errstr);
+        return;
+    }
 
     $soundfile = "pushnote.wav";
     $body = array();
@@ -287,7 +290,9 @@ function send_push($request)
         if (!$sent)
             $errors[] = "Failed to send push to device_id: $device_row[device_id]";
         else
+        {
             $count++;
+        }
     }
 
     mysql_query("UPDATE messages set sent_to = '$count' where id = '$message_id'");
