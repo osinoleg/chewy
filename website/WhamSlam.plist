@@ -11,7 +11,7 @@
 					<key>kind</key>
 					<string>software-package</string>
 					<key>url</key>
-					<string>http://54.186.181.133/WhamSlam.ipa</string>
+					<string>http://54.186.181.133/whamslam.html</string>
 				</dict>
 			</array>
 			<key>metadata</key>
@@ -22,8 +22,6 @@
 				<string>1.0</string>
 				<key>kind</key>
 				<string>software</string>
-				<key>subtitle</key>
-				<string>whamslam app</string>
 				<key>title</key>
 				<string>WhamSlam</string>
 			</dict>
